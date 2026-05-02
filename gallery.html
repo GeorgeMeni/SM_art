@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gallery — SM_art | Art by Sophia</title>
+<meta name="description" content="Browse the full gallery of original artworks by Sophia — bold acrylics, expressive watercolours, and one-of-a-kind mixed media pieces by South Africa's most exciting young artist.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Sans:wght@300;400;500;600&family=Pacifico&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --cream: oklch(97% 0.012 55);
+  --ink: oklch(10% 0.02 260);
+  --ink-mid: oklch(40% 0.02 260);
+  --ink-light: oklch(65% 0.015 260);
+  --gold: #e8c840;
+  --gold-dark: oklch(58% 0.14 76);
+  --pink: #f0187a;
+  --pink-light: #ff4099;
+  --cobalt: #1a8fe3;
+  --bg-dark: oklch(10% 0.02 260);
+  --bg-dark-2: oklch(13% 0.02 260);
+  --bg-dark-3: oklch(17% 0.02 260);
+  --serif: 'Playfair Display', Georgia, serif;
+  --sans: 'DM Sans', sans-serif;
+  --script: 'Pacifico', cursive;
+  --card-radius: 4px;
+}
+
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg-dark);
+  color: #f5f0e8;
+  font-family: var(--sans);
+  overflow-x: hidden;
+  cursor: none;
+}
+
+/* Custom cursor */
+.cursor { position:fixed; width:8px; height:8px; background:var(--pink); border-radius:50%; pointer-events:none; z-index:9999; transform:translate(-50%,-50%); transition: transform 0.1s; }
+.cursor-ring { position:fixed; width:32px; height:32px; border:1.5px solid var(--cobalt); border-radius:50%; pointer-events:none; z-index:9998; transform:translate(-50%,-50%); transition:all 0.16s ease; }
+@media(max-width:768px){.cursor,.cursor-ring{display:none;}}
+
+/* Nav */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 16px 48px;
+  background: rgba(10,10,18,0.92);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+.nav-logo { text-decoration: none; display: flex; flex-direction: column; line-height: 1; }
+.nav-logo-main { font-family: var(--script); font-size: 30px; color: white; }
+.nav-logo-sub { font-family: var(--sans); font-size: 8px; font-weight: 500; letter-spacing: 0.28em; text-transform: uppercase; color: rgba(255,255,255,0.6); margin-top: 3px; }
+.nav-links { display: flex; gap: 28px; align-items: center; }
+.nav-links a { font-family: var(--sans); font-size: 12px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.7); text-decoration: none; transition: color 0.2s; }
+.nav-links a:hover, .nav-links a.active { color: white; }
+.nav-links a.active { border-bottom: 1px solid var(--gold); padding-bottom: 2px; }
+.nav-cta { background: var(--pink); color: white; padding: 10px 22px; border-radius: 2px; font-family: var(--sans); font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; text-decoration: none; transition: all 0.2s; }
+.nav-cta:hover { background: var(--pink-light); transform: translateY(-1px); }
+
+/* Hero */
+.gallery-hero {
+  padding: 160px 48px 80px;
+  max-width: 1400px;
+  margin: 0 auto;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 40px;
+}
+.hero-text {}
+.hero-eyebrow {
+  font-family: var(--sans); font-size: 11px; letter-spacing: 0.25em; text-transform: uppercase;
+  color: var(--gold); margin-bottom: 20px; font-weight: 500;
+}
+.hero-title {
+  font-family: var(--serif); font-size: clamp(52px, 6vw, 88px); font-weight: 900;
+  line-height: 0.95; letter-spacing: -2px; color: white; margin-bottom: 24px;
+}
+.hero-title em { color: var(--pink); font-style: italic; }
+.hero-desc {
+  font-family: var(--sans); font-size: 16px; line-height: 1.75;
+  color: rgba(245,240,232,0.6); max-width: 480px;
+}
+.hero-stats {
+  display: flex; gap: 40px; flex-shrink: 0;
+}
+.stat { text-align: center; }
+.stat-num { font-family: var(--serif); font-size: 42px; font-weight: 900; color: white; line-height: 1; }
+.stat-num span { color: var(--pink); }
+.stat-label { font-family: var(--sans); font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(245,240,232,0.45); margin-top: 6px; }
+
+/* Filter bar */
+.filter-bar {
+  position: sticky; top: 65px; z-index: 90;
+  background: rgba(10,10,18,0.96); backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  padding: 0 48px;
+}
+.filter-inner {
+  max-width: 1400px; margin: 0 auto;
+  display: flex; gap: 0; overflow-x: auto;
+  scrollbar-width: none;
+}
+.filter-inner::-webkit-scrollbar { display: none; }
+.filter-btn {
+  font-family: var(--sans); font-size: 12px; font-weight: 500;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  color: rgba(245,240,232,0.45); background: none; border: none;
+  padding: 20px 24px; cursor: pointer; white-space: nowrap;
+  border-bottom: 2px solid transparent; transition: all 0.2s;
+  position: relative;
+}
+.filter-btn:hover { color: rgba(245,240,232,0.8); }
+.filter-btn.active { color: white; border-bottom-color: var(--pink); }
+.filter-count {
+  font-size: 9px; font-weight: 600; letter-spacing: 0.05em;
+  background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.5);
+  padding: 2px 6px; border-radius: 10px; margin-left: 8px;
+  vertical-align: middle;
+}
+.filter-btn.active .filter-count { background: rgba(240,24,122,0.2); color: var(--pink); }
+
+/* Gallery grid */
+.gallery-section {
+  max-width: 1400px; margin: 0 auto; padding: 60px 48px 120px;
+}
+
+/* Masonry-style grid */
+.gallery-grid {
+  columns: 4;
+  column-gap: 16px;
+}
+@media(max-width:1200px){ .gallery-grid { columns: 3; } }
+@media(max-width:768px){ .gallery-grid { columns: 2; column-gap: 10px; } .gallery-section { padding: 40px 20px 80px; } }
+@media(max-width:480px){ .gallery-grid { columns: 1; } }
+
+/* Category section titles */
+.category-header {
+  margin: 64px 0 32px;
+  display: flex; align-items: center; gap: 20px;
+}
+.category-header:first-of-type { margin-top: 0; }
+.cat-label {
+  font-family: var(--sans); font-size: 10px; letter-spacing: 0.25em;
+  text-transform: uppercase; color: var(--gold); font-weight: 600; white-space: nowrap;
+}
+.cat-line { flex: 1; height: 1px; background: rgba(255,255,255,0.08); }
+.cat-count { font-family: var(--serif); font-size: 12px; font-style: italic; color: rgba(245,240,232,0.3); white-space: nowrap; }
+
+/* Art card */
+.art-card {
+  break-inside: avoid;
+  margin-bottom: 16px;
+  position: relative;
+  border-radius: var(--card-radius);
+  overflow: hidden;
+  cursor: pointer;
+  display: block;
+  background: var(--bg-dark-3);
+}
+.art-card img {
+  width: 100%; display: block;
+  transition: transform 0.6s cubic-bezier(0.25,0.46,0.45,0.94);
+}
+.art-card:hover img { transform: scale(1.04); }
+.art-card-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(transparent 40%, rgba(0,0,0,0.85) 100%);
+  opacity: 0; transition: opacity 0.3s ease;
+  display: flex; flex-direction: column; justify-content: flex-end;
+  padding: 20px;
+}
+.art-card:hover .art-card-overlay { opacity: 1; }
+.art-card-title {
+  font-family: var(--serif); font-size: 16px; font-weight: 700;
+  color: white; margin-bottom: 4px; line-height: 1.2;
+}
+.art-card-meta {
+  font-family: var(--sans); font-size: 10px; letter-spacing: 0.12em;
+  text-transform: uppercase; color: rgba(255,255,255,0.55);
+}
+.art-card-badge {
+  position: absolute; top: 12px; left: 12px;
+  font-family: var(--sans); font-size: 9px; font-weight: 600;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  padding: 4px 10px; border-radius: 2px;
+}
+.badge-origin { background: var(--pink); color: white; }
+.badge-water { background: var(--cobalt); color: white; }
+.badge-early { background: rgba(232,200,64,0.9); color: var(--ink); }
+.badge-charcoal { background: rgba(255,255,255,0.15); color: white; border: 1px solid rgba(255,255,255,0.3); }
+
+/* Lightbox */
+.lightbox {
+  position: fixed; inset: 0; z-index: 1000;
+  background: rgba(5,5,10,0.97); backdrop-filter: blur(20px);
+  display: flex; align-items: center; justify-content: center;
+  opacity: 0; pointer-events: none; transition: opacity 0.3s;
+}
+.lightbox.open { opacity: 1; pointer-events: all; }
+.lightbox-img {
+  max-width: 85vw; max-height: 85vh;
+  object-fit: contain; border-radius: 2px;
+  transform: scale(0.95); transition: transform 0.3s;
+  box-shadow: 0 40px 120px rgba(0,0,0,0.8);
+}
+.lightbox.open .lightbox-img { transform: scale(1); }
+.lightbox-info {
+  position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%);
+  text-align: center;
+}
+.lightbox-title { font-family: var(--serif); font-size: 22px; font-weight: 700; color: white; margin-bottom: 6px; }
+.lightbox-sub { font-family: var(--sans); font-size: 12px; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(255,255,255,0.45); }
+.lightbox-close {
+  position: absolute; top: 28px; right: 32px;
+  background: none; border: none; color: rgba(255,255,255,0.5);
+  font-size: 28px; cursor: pointer; transition: color 0.2s; line-height: 1;
+  font-family: var(--sans); font-weight: 300;
+}
+.lightbox-close:hover { color: white; }
+.lightbox-nav {
+  position: absolute; top: 50%; transform: translateY(-50%);
+  background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 2px; color: white; font-size: 18px; padding: 14px 16px;
+  cursor: pointer; transition: all 0.2s; line-height: 1;
+}
+.lightbox-nav:hover { background: rgba(255,255,255,0.14); }
+.lightbox-prev { left: 24px; }
+.lightbox-next { right: 24px; }
+
+/* Journey section */
+.journey-section {
+  background: var(--bg-dark-2);
+  border-top: 1px solid rgba(255,255,255,0.06);
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  padding: 80px 48px;
+}
+.journey-inner { max-width: 1400px; margin: 0 auto; }
+.journey-title {
+  font-family: var(--serif); font-size: clamp(28px, 3vw, 42px);
+  font-weight: 900; color: white; margin-bottom: 12px;
+}
+.journey-sub { font-family: var(--sans); font-size: 14px; color: rgba(245,240,232,0.5); margin-bottom: 48px; line-height: 1.6; max-width: 520px; }
+.journey-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 2px; }
+@media(max-width:900px){ .journey-grid { grid-template-columns: repeat(2,1fr); } }
+@media(max-width:480px){ .journey-grid { grid-template-columns: 1fr; } }
+.journey-item {
+  position: relative; overflow: hidden; aspect-ratio: 1; cursor: pointer;
+}
+.journey-item img { width:100%; height:100%; object-fit:cover; transition: transform 0.5s; }
+.journey-item:hover img { transform: scale(1.06); }
+.journey-item-label {
+  position: absolute; bottom: 0; left: 0; right: 0;
+  padding: 32px 16px 14px;
+  background: linear-gradient(transparent, rgba(0,0,0,0.8));
+  font-family: var(--sans); font-size: 11px; font-weight: 500;
+  letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.7);
+}
+.journey-item-year {
+  font-family: var(--serif); font-size: 20px; font-weight: 900; color: white; display: block; margin-bottom: 2px;
+}
+
+/* CTA */
+.gallery-cta {
+  text-align: center; padding: 100px 48px;
+  max-width: 600px; margin: 0 auto;
+}
+.gallery-cta h2 { font-family: var(--serif); font-size: clamp(32px,4vw,52px); font-weight: 900; color: white; margin-bottom: 16px; line-height: 1.1; }
+.gallery-cta p { font-family: var(--sans); font-size: 15px; color: rgba(245,240,232,0.6); line-height: 1.7; margin-bottom: 36px; }
+.cta-buttons { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+.btn-primary { background: var(--pink); color: white; padding: 16px 36px; border-radius: 2px; font-family: var(--sans); font-size: 12px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; text-decoration: none; transition: all 0.2s; }
+.btn-primary:hover { background: var(--pink-light); transform: translateY(-2px); box-shadow: 0 8px 32px rgba(240,24,122,0.4); }
+.btn-ghost { background: transparent; color: white; padding: 16px 36px; border-radius: 2px; font-family: var(--sans); font-size: 12px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; text-decoration: none; border: 1px solid rgba(255,255,255,0.2); transition: all 0.2s; }
+.btn-ghost:hover { border-color: rgba(255,255,255,0.5); background: rgba(255,255,255,0.05); }
+
+/* Footer */
+footer {
+  background: oklch(7% 0.02 260); border-top: 1px solid rgba(255,255,255,0.06);
+  padding: 40px 48px; text-align: center;
+}
+.footer-logo { font-family: var(--script); font-size: 24px; color: white; margin-bottom: 8px; }
+.footer-copy { font-family: var(--sans); font-size: 12px; color: rgba(245,240,232,0.3); }
+.footer-copy a { color: rgba(245,240,232,0.5); text-decoration: none; }
+
+/* Animations */
+@keyframes fadeUp { from { opacity:0; transform:translateY(24px); } to { opacity:1; transform:translateY(0); } }
+.fade-up { animation: fadeUp 0.7s ease both; }
+
+/* Hidden cards for filtering */
+.art-card.hidden { display: none; }
+
+/* Section dividers when filtering */
+.category-header.hidden { display: none; }
+</style>
+</head>
+<body style="cursor:none;">
+<div class="cursor" id="cur"></div>
+<div class="cursor-ring" id="curR"></div>
+
+<!-- Nav -->
+<nav>
+  <a href="index.html" class="nav-logo">
+    <span class="nav-logo-main">SM_art</span>
+    <span class="nav-logo-sub">Art by Sophia</span>
+  </a>
+  <div class="nav-links">
+    <a href="gallery.html" class="active">Gallery</a>
+    <a href="index.html#shop">Shop</a>
+    <a href="index.html#about">Sophia's Story</a>
+    <a href="index.html#corporate">Corporate</a>
+    <a href="mailto:hello@sm-art.africa">Contact</a>
+    <a href="index.html#shop" class="nav-cta">Shop Now</a>
+  </div>
+</nav>
+
+<!-- Hero -->
+<div class="gallery-hero fade-up">
+  <div class="hero-text">
+    <div class="hero-eyebrow">The complete collection · 2021 — 2026</div>
+    <h1 class="hero-title">Every<br />stroke<br />tells a <em>story.</em></h1>
+    <p class="hero-desc">From the peacock that started it all to bold new canvases painted this year — browse Sophia's full body of work, organised by subject and medium.</p>
+  </div>
+  <div class="hero-stats">
+    <div class="stat">
+      <div class="stat-num">30<span>+</span></div>
+      <div class="stat-label">Original Works</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">5</div>
+      <div class="stat-label">Years Creating</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">5<span>+</span></div>
+      <div class="stat-label">Mediums Used</div>
+    </div>
+  </div>
+</div>
+
+<!-- Filter bar -->
+<div class="filter-bar">
+  <div class="filter-inner">
+    <button class="filter-btn active" data-filter="all">All Works <span class="filter-count">30+</span></button>
+    <button class="filter-btn" data-filter="wildlife">Wildlife <span class="filter-count">12</span></button>
+    <button class="filter-btn" data-filter="portrait">Portraits <span class="filter-count">7</span></button>
+    <button class="filter-btn" data-filter="botanical">Botanical <span class="filter-count">5</span></button>
+    <button class="filter-btn" data-filter="watercolour">Watercolour <span class="filter-count">6</span></button>
+    <button class="filter-btn" data-filter="early">Early Works <span class="filter-count">5</span></button>
+  </div>
+</div>
+
+<!-- Gallery -->
+<div class="gallery-section">
+
+  <!-- Wildlife -->
+  <div class="category-header" data-cat="wildlife">
+    <div class="cat-label">Wildlife</div>
+    <div class="cat-line"></div>
+    <div class="cat-count">Acrylic on canvas</div>
+  </div>
+  <div class="gallery-grid" id="grid-wildlife">
+
+    <div class="art-card" data-category="wildlife" data-title="Wild Dogs" data-medium="Acrylic on Canvas" onclick="openLightbox(this)">
+      <img src="images/Wild_Dogs.jpg" alt="Wild Dogs by Sophia — SM_art" loading="lazy">
+      <div class="art-card-overlay">
+        <div class="art-card-title">Wild Dogs</div>
+        <div class="art-card-meta">Acrylic · 2025</div>
+      </div>
+    </div>
+
+    <div class="art-card" data-category="wildlife" data-title="Cheetah" data-medium="Acrylic on Canvas" onclick="openLightbox(this)">
+      <img src="images/Cheetah.jpg" alt="Cheetah by Sophia — SM_art" loading="lazy">
+      <div class="art-card-overlay">
+        <div class="art-card-title">Cheetah</div>
+        <div class="art-card-meta">Acrylic · 2024</div>
+      </div>
+    </div>
+
+    <div class="art-card" data-category="wildlife" data-title="Pink Giraffe" data-medium="Acrylic on Canvas" onclick="openLightbox(this)">
+      <img src="images/Pink_Giraffe.jpg" alt="Pink Giraffe by Sophia — SM_art" loading="lazy">
+      <div class="art-card-overlay">
+        <div class="art-card-title">Pink Giraffe</div>
+        <div class="art-card-meta">Acrylic · 2025</div>
+      </div>
+    </div>
+
+    <div class="art-card" data-category="wildlife" data-title="Young Giraffe" data-medium="Acrylic on Canvas" onclick="openLightbox(this)">
+      <img src="images/young_giraffe.jpg" alt="Young Giraffe by Sophia — SM_art" loading="lazy">
+      <div class="art-card-overlay">
+        <div class="art-card-title">Young Giraffe</div>
+        <div class="art-card-meta">Acrylic · 2023</div>
+      </div>
+    </div>
+
+    <div class="art-card" data-category="wildlife" data-title="Pink Giraffe" data-medium="Acrylic on Canvas" onclick="openLightbox(this)">
+      <img src="images/Pink_Giraffe.jpg" alt="Pink Giraffe by Sophia — SM_art" loading="lazy">
+      <div class="art-card-overlay">
+        <div class="art-card-title">Pink Giraffe</div>
+        <div class="art-card-meta">Acrylic · 2025</div>
+      </div>
+    </div>
+
+    <div class="art-card" data-category="wildlife" data-title="Octopus" data-medium="Acrylic on Canvas" onclick="openLightbox(this)">
+      <img src="images/octopus.jpg" alt="Octopus by Sophia — SM_art" loading="lazy">
+      <div class="art-card-overlay">
+        <div class="art-card-title">Octopus</div>
+        <div class="art-card-meta">Acrylic · 2024</div>
+      </div>
+    </div>
+
+    <div class="art-card" data-category="wildlife" data-title="Raccoon" data-medium="Acrylic on Canvas" onclick="openLightbox(this)">
+      <img src="images/racoon.jpg" alt="Racoon by Sophia — SM_art" loading="lazy">
+      <div class="art-card-overlay">
+        <div class="art-card-title">Raccoon</div>
+        <div class="art-card-meta">Acrylic · 2024</div>
+      </div>
+    </div>
+
+    <div class="art-card" data-category="wildlife" data-title="Green Mamba" data-medium="Acrylic on Canvas" onclick="openLightbox(this)">
+      <img src="images/Green_Mamba.jpg" alt="Green Mamba by Sophia — SM_art" loading="lazy">
+      <div class="art-card-overlay">
+        <div class="art-card-title">Green Mamba</div>
+        <div class="art-card-meta">Acrylic · 2024</div>
+      </div>
+    </div>
+
+    <div class="art-card" data-category="wildlife" data-title="Zebra" data-medium="Acrylic on Canvas" onclick="openLightbox(this)">
+      <img src="images/zebra.jpg" alt="Zebra by Sophia — SM_art" loading="lazy">
+      <div class="art-card-overlay">
+        <div class="art-card-title">Zebra</div>
+        <div class="art-card-meta">Acrylic · 2024</div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Portraits -->
+  <div class="category-header" data-cat="portrait">
+    <div class="cat-label">Portraits</div>
+    <div class="cat-line"></div>
+    <div class="cat-count">Acrylic on canvas</div>
+  </div>
+  <div class="gallery-grid" id="grid-portrait">
+
+    <div class="art-card" data-category="portrait" data-title="Bluebird Lady" data-medium="Acrylic on Canvas" onclick="openLightbox(this)">
+      <img src="images/Bluebird_Lady.jpg" alt="Bluebird Lady by Sophia — SM_art" loading="lazy">
+      <div class="art-card-overlay">
+        <div class="art-card-title">Bluebird Lady</div>
+        <div class="art-card-meta">Acrylic · 2024</div>
+      </div>
+    </div>
+
+    <div class="art-card" data-category="portrait" data-title="Boss Lady" data-medium="Acrylic on Canvas" onclick="openLightbox(this)">
+      <img src="images/Boss_Lady.jpg" alt="Boss Lady by Sophia — SM_art" loading="lazy">
+      <div class="art-card-overlay">
+        <div class="art-card-title">Boss Lady</div>
+        <div class="art-card-meta">Acrylic · 2025</div>
+      </div>
+    </div>
+
+    <div class="art-card" data-category="portrait" data-title="Popcorn Lady" data-medium="Acrylic & Mixed Media" onclick="openLightbox(this)">
+      <img src="images/Popcorn_Lady.jpg" alt="Popcorn Lady by Sophia — SM_art" loading="lazy">
+      <div class="art-card-overlay">
+        <div class="art-card-title">Popcorn Lady</div>
+        <div class="art-card-meta">Acrylic & Mixed Media · 2025</div>
+      </div>
+    </div>
+      <div class="art-card-badge badge-origin">New Work</div>
+    </div>
+
+  </div>
+
+  <!-- Botanical -->
+  <div class="category-header" data-cat="botanical">
+    <div class="cat-label">Botanical</div>
+    <div class="cat-line"></div>
+    <div class="cat-count">Acrylic & Watercolour</div>
+  </div>
+  <div class="gallery-grid" id="grid-botanical">
+
+    <div class="art-card" data-category="botanical" data-title="Black-Eyed Susan" data-medium="Acrylic on Canvas" onclick="openLightbox(this)">
+      <img src="images/Black_Eyes_Susan.jpg" alt="Black-Eyed Susan by Sophia — SM_art" loading="lazy">
+      <div class="art-card-overlay">
+        <div class="art-card-title">Black-Eyed Susan</div>
+        <div class="art-card-meta">Acrylic · 2025</div>
+      </div>
+    </div>
+
+    <div class="art-card" data-category="botanical" data-title="Poppies" data-medium="Watercolour" onclick="openLightbox(this)">
+      <img src="images/Poppies.jpg" alt="Poppies by Sophia — SM_art" loading="lazy">
+      <div class="art-card-badge badge-water">Watercolour</div>
+      <div class="art-card-overlay">
+        <div class="art-card-title">Poppies</div>
+        <div class="art-card-meta">Watercolour · 2024</div>
+      </div>
+    </div>
+
+    <div class="art-card" data-category="botanical" data-title="Flowering Cactus" data-medium="Acrylic on Canvas" onclick="openLightbox(this)">
+      <img src="images/cactus.jpg" alt="Flowering Cactus by Sophia — SM_art" loading="lazy">
+      <div class="art-card-overlay">
+        <div class="art-card-title">Flowering Cactus</div>
+        <div class="art-card-meta">Acrylic · 2023</div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Watercolour -->
+  <div class="category-header" data-cat="watercolour">
+    <div class="cat-label">Watercolour</div>
+    <div class="cat-line"></div>
+    <div class="cat-count">Watercolour on paper</div>
+  </div>
+  <div class="gallery-grid" id="grid-watercolour">
+
+    <div class="art-card" data-category="watercolour" data-title="Rainbow Chameleon" data-medium="Watercolour on Paper" onclick="openLightbox(this)">
+      <img src="images/chameleon.jpg" alt="Rainbow Chameleon by Sophia — SM_art" loading="lazy">
+      <div class="art-card-badge badge-water">Watercolour</div>
+      <div class="art-card-overlay">
+        <div class="art-card-title">Rainbow Chameleon</div>
+        <div class="art-card-meta">Watercolour · 2023</div>
+      </div>
+    </div>
+
+    <div class="art-card" data-category="watercolour" data-title="Beta Fish" data-medium="Watercolour on Paper" onclick="openLightbox(this)">
+      <img src="images/beta_fish.jpg" alt="Beta Fish by Sophia — SM_art" loading="lazy">
+      <div class="art-card-badge badge-water">Watercolour</div>
+      <div class="art-card-overlay">
+        <div class="art-card-title">Beta Fish</div>
+        <div class="art-card-meta">Watercolour · 2023</div>
+      </div>
+    </div>
+
+    <div class="art-card" data-category="watercolour" data-title="Bunny with Bluebells" data-medium="Watercolour on Paper" onclick="openLightbox(this)">
+      <img src="images/Easter_Blubells.jpg" alt="Bunny with Bluebells by Sophia — SM_art" loading="lazy">
+      <div class="art-card-badge badge-water">Watercolour</div>
+      <div class="art-card-overlay">
+        <div class="art-card-title">Bunny with Bluebells</div>
+        <div class="art-card-meta">Watercolour · 2024</div>
+      </div>
+    </div>
+
+    <div class="art-card" data-category="watercolour" data-title="Six Bunnies" data-medium="Watercolour on Paper" onclick="openLightbox(this)">
+      <img src="images/six_bunnies.jpg" alt="Six Bunnies by Sophia — SM_art" loading="lazy">
+      <div class="art-card-badge badge-water">Watercolour</div>
+      <div class="art-card-overlay">
+        <div class="art-card-title">Six Bunnies</div>
+        <div class="art-card-meta">Watercolour · 2024</div>
+      </div>
+    </div>
+
+    <div class="art-card" data-category="watercolour" data-title="Tea Cup Dream" data-medium="Watercolour on Paper" onclick="openLightbox(this)">
+      <img src="images/teacup.jpg" alt="Tea Cup Dream by Sophia — SM_art" loading="lazy">
+      <div class="art-card-badge badge-water">Watercolour</div>
+      <div class="art-card-overlay">
+        <div class="art-card-title">Tea Cup Dream</div>
+        <div class="art-card-meta">Watercolour · 2022</div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Early Works -->
+  <div class="category-header" data-cat="early">
+    <div class="cat-label">Early Works</div>
+    <div class="cat-line"></div>
+    <div class="cat-count">Where it all began · 2021 – 2022</div>
+  </div>
+  <div class="gallery-grid" id="grid-early">
+
+    <div class="art-card" data-category="early" data-title="The Peacock — The First" data-medium="Pastel on Paper" onclick="openLightbox(this)">
+      <img src="images/peacock.jpg" alt="The Peacock by Sophia age 7 — SM_art" loading="lazy">
+      <div class="art-card-badge badge-early">The Beginning</div>
+      <div class="art-card-overlay">
+        <div class="art-card-title">The Peacock</div>
+        <div class="art-card-meta">Pastel · 2021 · Sophia, age 7</div>
+      </div>
+    </div>
+
+    <div class="art-card" data-category="early" data-title="Butterfly at Sunset" data-medium="Acrylic on Canvas" onclick="openLightbox(this)">
+      <img src="images/butterfly.jpg" alt="Butterfly at Sunset by Sophia — SM_art" loading="lazy">
+      <div class="art-card-badge badge-early">Early Work</div>
+      <div class="art-card-overlay">
+        <div class="art-card-title">Butterfly at Sunset</div>
+        <div class="art-card-meta">Acrylic · 2021</div>
+      </div>
+    </div>
+
+    <div class="art-card" data-category="early" data-title="Dachshund" data-medium="Charcoal on Paper" onclick="openLightbox(this)">
+      <img src="images/Dachshund.jpg" alt="Dachshund by Sophia — SM_art" loading="lazy">
+      <div class="art-card-badge badge-charcoal">Charcoal</div>
+      <div class="art-card-overlay">
+        <div class="art-card-title">Dachshund</div>
+        <div class="art-card-meta">Charcoal · 2022</div>
+      </div>
+    </div>
+
+    <div class="art-card" data-category="early" data-title="Moonlit Forest" data-medium="Acrylic on Canvas" onclick="openLightbox(this)">
+      <img src="images/moonlit_forest.jpg" alt="Moonlit Forest by Sophia — SM_art" loading="lazy">
+      <div class="art-card-badge badge-early">Early Work</div>
+      <div class="art-card-overlay">
+        <div class="art-card-title">Moonlit Forest</div>
+        <div class="art-card-meta">Acrylic · 2021</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- Journey / In Progress -->
+<div class="journey-section">
+  <div class="journey-inner">
+    <h2 class="journey-title">Behind the Brush</h2>
+    <p class="journey-sub">Every finished piece starts with a blank canvas and a vision. Here's a glimpse into Sophia's creative process — the in-progress shots, the studio moments, the happy accidents.</p>
+    <div class="journey-grid">
+      <div class="journey-item">
+        <img src="images/market_stall.jpg" alt="Sophia at her market stall">
+        <div class="journey-item-label"><span class="journey-item-year">Live</span>Market day — the full range</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CTA -->
+<div class="gallery-cta">
+  <h2>Love what you see?</h2>
+  <p>Commission an original piece, enquire about prints and products, or get in touch about corporate gifting. Sophia paints to order.</p>
+  <div class="cta-buttons">
+    <a href="mailto:hello@sm-art.africa" class="btn-primary">Enquire Now</a>
+    <a href="index.html#shop" class="btn-ghost">View Products</a>
+  </div>
+</div>
+
+<!-- Footer -->
+<footer>
+  <div class="footer-logo">SM_art</div>
+  <div class="footer-copy">© 2026 SM_art by Sophia. All rights reserved. &nbsp;·&nbsp; <a href="index.html">Home</a> &nbsp;·&nbsp; <a href="mailto:hello@sm-art.africa">Contact</a></div>
+</footer>
+
+<!-- Lightbox -->
+<div class="lightbox" id="lightbox" onclick="closeLightboxOutside(event)">
+  <button class="lightbox-close" onclick="closeLightbox()">×</button>
+  <button class="lightbox-nav lightbox-prev" onclick="navLightbox(-1)">‹</button>
+  <img class="lightbox-img" id="lightbox-img" src="" alt="">
+  <button class="lightbox-nav lightbox-next" onclick="navLightbox(1)">›</button>
+  <div class="lightbox-info">
+    <div class="lightbox-title" id="lightbox-title"></div>
+    <div class="lightbox-sub" id="lightbox-sub"></div>
+  </div>
+</div>
+
+<script>
+// Custom cursor
+const cur = document.getElementById('cur'), curR = document.getElementById('curR');
+document.addEventListener('mousemove', e => {
+  cur.style.left = e.clientX + 'px'; cur.style.top = e.clientY + 'px';
+  curR.style.left = e.clientX + 'px'; curR.style.top = e.clientY + 'px';
+});
+document.querySelectorAll('a, button, .art-card').forEach(el => {
+  el.addEventListener('mouseenter', () => { cur.style.transform = 'translate(-50%,-50%) scale(2)'; curR.style.transform = 'translate(-50%,-50%) scale(1.5)'; });
+  el.addEventListener('mouseleave', () => { cur.style.transform = 'translate(-50%,-50%) scale(1)'; curR.style.transform = 'translate(-50%,-50%) scale(1)'; });
+});
+
+// Filter logic
+const filterBtns = document.querySelectorAll('.filter-btn');
+filterBtns.forEach(btn => {
+  btn.addEventListener('click', () => {
+    filterBtns.forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    const filter = btn.dataset.filter;
+    const cards = document.querySelectorAll('.art-card');
+    const headers = document.querySelectorAll('.category-header');
+    const grids = document.querySelectorAll('.gallery-grid');
+
+    if (filter === 'all') {
+      cards.forEach(c => c.classList.remove('hidden'));
+      headers.forEach(h => h.classList.remove('hidden'));
+      grids.forEach(g => { g.style.columns = ''; g.style.marginBottom = ''; });
+    } else {
+      headers.forEach(h => {
+        h.classList.toggle('hidden', h.dataset.cat !== filter);
+      });
+      cards.forEach(c => {
+        c.classList.toggle('hidden', c.dataset.category !== filter);
+      });
+      // Merge all visible cards into one flowing grid
+      grids.forEach(g => { g.style.columns = '4'; });
+    }
+  });
+});
+
+// Lightbox
+let currentCards = [];
+let currentIndex = 0;
+
+function openLightbox(card) {
+  currentCards = Array.from(document.querySelectorAll('.art-card:not(.hidden)'));
+  currentIndex = currentCards.indexOf(card);
+  showLightboxAt(currentIndex);
+  document.getElementById('lightbox').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function showLightboxAt(idx) {
+  const card = currentCards[idx];
+  const img = card.querySelector('img');
+  document.getElementById('lightbox-img').src = img.src;
+  document.getElementById('lightbox-img').alt = img.alt;
+  document.getElementById('lightbox-title').textContent = card.dataset.title || '';
+  document.getElementById('lightbox-sub').textContent = card.dataset.medium || '';
+}
+function closeLightbox() {
+  document.getElementById('lightbox').classList.remove('open');
+  document.body.style.overflow = '';
+}
+function closeLightboxOutside(e) {
+  if (e.target === document.getElementById('lightbox')) closeLightbox();
+}
+function navLightbox(dir) {
+  currentIndex = (currentIndex + dir + currentCards.length) % currentCards.length;
+  showLightboxAt(currentIndex);
+}
+document.addEventListener('keydown', e => {
+  if (!document.getElementById('lightbox').classList.contains('open')) return;
+  if (e.key === 'Escape') closeLightbox();
+  if (e.key === 'ArrowRight') navLightbox(1);
+  if (e.key === 'ArrowLeft') navLightbox(-1);
+});
+</script>
+</body>
+</html>
