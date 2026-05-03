@@ -65,13 +65,13 @@ nav {
 
 /* Hero */
 .gallery-hero {
-  padding: 160px 48px 80px;
+  padding: 140px 48px 60px;
   max-width: 1400px;
   margin: 0 auto;
-  display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
-  gap: 40px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: center;
 }
 .hero-text {}
 .hero-eyebrow {
@@ -85,15 +85,23 @@ nav {
 .hero-title em { color: var(--pink); font-style: italic; }
 .hero-desc {
   font-family: var(--sans); font-size: 16px; line-height: 1.75;
-  color: rgba(245,240,232,0.6); max-width: 480px;
+  color: rgba(245,240,232,0.6); max-width: 480px; margin-bottom: 36px;
 }
 .hero-stats {
-  display: flex; gap: 40px; flex-shrink: 0;
+  display: flex; gap: 40px;
 }
-.stat { text-align: center; }
-.stat-num { font-family: var(--serif); font-size: 42px; font-weight: 900; color: white; line-height: 1; }
+.stat { text-align: left; }
+.stat-num { font-family: var(--serif); font-size: 36px; font-weight: 900; color: white; line-height: 1; }
 .stat-num span { color: var(--pink); }
 .stat-label { font-family: var(--sans); font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(245,240,232,0.45); margin-top: 6px; }
+.hero-image { position: relative; border-radius: 4px; overflow: hidden; }
+.hero-image img { width: 100%; height: 480px; object-fit: cover; object-position: center; display: block; border-radius: 4px; box-shadow: 0 32px 80px rgba(0,0,0,0.6); transition: transform 0.8s ease; }
+.hero-image:hover img { transform: scale(1.03); }
+.hero-image-caption { position: absolute; bottom: 0; left: 0; right: 0; padding: 40px 20px 16px; background: linear-gradient(transparent, rgba(0,0,0,0.7)); font-family: var(--sans); font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(255,255,255,0.6); }
+@media(max-width:900px) {
+  .gallery-hero { grid-template-columns: 1fr; }
+  .hero-image { display: none; }
+}
 
 /* Filter bar */
 .filter-bar {
@@ -133,12 +141,14 @@ nav {
 
 /* Masonry-style grid */
 .gallery-grid {
-  columns: 4;
-  column-gap: 16px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+  grid-auto-rows: 10px;
 }
-@media(max-width:1200px){ .gallery-grid { columns: 3; } }
-@media(max-width:768px){ .gallery-grid { columns: 2; column-gap: 10px; } .gallery-section { padding: 40px 20px 80px; } }
-@media(max-width:480px){ .gallery-grid { columns: 1; } }
+@media(max-width:1200px){ .gallery-grid { grid-template-columns: repeat(3, 1fr); } }
+@media(max-width:768px){ .gallery-grid { grid-template-columns: repeat(2, 1fr); } .gallery-section { padding: 40px 20px 80px; } }
+@media(max-width:480px){ .gallery-grid { grid-template-columns: 1fr; } }
 
 /* Category section titles */
 .category-header {
@@ -155,17 +165,19 @@ nav {
 
 /* Art card */
 .art-card {
-  break-inside: avoid;
-  margin-bottom: 16px;
   position: relative;
   border-radius: var(--card-radius);
   overflow: hidden;
   cursor: pointer;
   display: block;
   background: var(--bg-dark-3);
+  grid-row-end: span 30;
 }
 .art-card img {
-  width: 100%; display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
   transition: transform 0.6s cubic-bezier(0.25,0.46,0.45,0.94);
 }
 .art-card:hover img { transform: scale(1.04); }
@@ -297,6 +309,16 @@ footer {
 
 /* Section dividers when filtering */
 .category-header.hidden { display: none; }
+
+/* Grid span classes for puzzle layout */
+.span-2 { grid-column: span 2; }
+.span-1 { grid-column: span 1; }
+.tall { grid-row: span 45; }
+.wide { grid-row: span 25; }
+.square { grid-row: span 35; }
+
+/* Beta Fish rotation fix */
+.rotate-img img { transform: rotate(90deg) scale(1.5) !important; }
 </style>
 </head>
 <body style="cursor:none;">
@@ -325,20 +347,24 @@ footer {
     <div class="hero-eyebrow">The complete collection · 2021 — 2026</div>
     <h1 class="hero-title">Every<br />stroke<br />tells a <em>story.</em></h1>
     <p class="hero-desc">From the peacock that started it all to bold new canvases painted this year — browse Sophia's full body of work, organised by subject and medium.</p>
+    <div class="hero-stats">
+      <div class="stat">
+        <div class="stat-num">31<span>+</span></div>
+        <div class="stat-label">Original Works</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">5</div>
+        <div class="stat-label">Years Creating</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">5<span>+</span></div>
+        <div class="stat-label">Mediums Used</div>
+      </div>
+    </div>
   </div>
-  <div class="hero-stats">
-    <div class="stat">
-      <div class="stat-num">35<span>+</span></div>
-      <div class="stat-label">Original Works</div>
-    </div>
-    <div class="stat">
-      <div class="stat-num">5</div>
-      <div class="stat-label">Years Creating</div>
-    </div>
-    <div class="stat">
-      <div class="stat-num">5<span>+</span></div>
-      <div class="stat-label">Mediums Used</div>
-    </div>
+  <div class="hero-image">
+    <img src="images/Wild_Dogs.jpg.jpg" alt="Wild Dogs by Sophia — SM_art">
+    <div class="hero-image-caption">Wild Dogs · Acrylic on Canvas</div>
   </div>
 </div>
 
@@ -365,7 +391,7 @@ footer {
   </div>
   <div class="gallery-grid" id="grid-wildlife">
 
-    <div class="art-card" data-category="wildlife" data-title="Wild Dogs" data-medium="Acrylic on Canvas" onclick="openLightbox(this)">
+    <div class="art-card span-2 wide" data-category="wildlife" data-title="Wild Dogs" data-medium="Acrylic on Canvas" onclick="openLightbox(this)">
       <img src="images/Wild_Dogs.jpg.jpg" alt="Wild Dogs by Sophia — SM_art" loading="lazy">
       <div class="art-card-overlay">
         <div class="art-card-title">Wild Dogs</div>
@@ -373,7 +399,7 @@ footer {
       </div>
     </div>
 
-    <div class="art-card" data-category="wildlife" data-title="Cheetah" data-medium="Acrylic on Canvas" onclick="openLightbox(this)">
+    <div class="art-card span-2 wide" data-category="wildlife" data-title="Cheetah" data-medium="Acrylic on Canvas" onclick="openLightbox(this)">
       <img src="images/Cheetah.jpg.jpg" alt="Cheetah by Sophia — SM_art" loading="lazy">
       <div class="art-card-overlay">
         <div class="art-card-title">Cheetah</div>
@@ -381,15 +407,7 @@ footer {
       </div>
     </div>
 
-    <div class="art-card" data-category="wildlife" data-title="Pink Giraffe" data-medium="Acrylic on Canvas" onclick="openLightbox(this)">
-      <img src="images/Pink_Giraffe.jpg.jpg" alt="Pink Giraffe by Sophia — SM_art" loading="lazy">
-      <div class="art-card-overlay">
-        <div class="art-card-title">Pink Giraffe</div>
-        <div class="art-card-meta">Acrylic · 2025</div>
-      </div>
-    </div>
-
-    <div class="art-card" data-category="wildlife" data-title="Young Giraffe" data-medium="Acrylic on Canvas" onclick="openLightbox(this)">
+    <div class="art-card span-1 tall" data-category="wildlife" data-title="Young Giraffe" data-medium="Acrylic on Canvas" onclick="openLightbox(this)">
       <img src="images/young_giraffe.jpg.jpg" alt="Young Giraffe by Sophia — SM_art" loading="lazy">
       <div class="art-card-overlay">
         <div class="art-card-title">Young Giraffe</div>
@@ -397,15 +415,15 @@ footer {
       </div>
     </div>
 
-    <div class="art-card" data-category="wildlife" data-title="Giraffe in a Robe" data-medium="Acrylic on Canvas" onclick="openLightbox(this)">
-      <img src="images/Pink_Giraffe.jpg.jpg" alt="Giraffe in a Robe by Sophia — SM_art" loading="lazy">
+    <div class="art-card span-1 tall" data-category="wildlife" data-title="Pinkcasso" data-medium="Acrylic on Canvas" onclick="openLightbox(this)">
+      <img src="images/Pink_Giraffe.jpg.jpg" alt="Pinkcasso by Sophia — SM_art" loading="lazy">
       <div class="art-card-overlay">
-        <div class="art-card-title">Giraffe in a Robe</div>
+        <div class="art-card-title">Pinkcasso</div>
         <div class="art-card-meta">Acrylic · 2025</div>
       </div>
     </div>
 
-    <div class="art-card" data-category="wildlife" data-title="Octopus" data-medium="Acrylic on Canvas" onclick="openLightbox(this)">
+    <div class="art-card span-1 square" data-category="wildlife" data-title="Octopus" data-medium="Acrylic on Canvas" onclick="openLightbox(this)">
       <img src="images/octopus.jpg.jpg" alt="Octopus by Sophia — SM_art" loading="lazy">
       <div class="art-card-overlay">
         <div class="art-card-title">Octopus</div>
@@ -413,7 +431,7 @@ footer {
       </div>
     </div>
 
-    <div class="art-card" data-category="wildlife" data-title="Raccoon" data-medium="Acrylic on Canvas" onclick="openLightbox(this)">
+    <div class="art-card span-1 square" data-category="wildlife" data-title="Raccoon" data-medium="Acrylic on Canvas" onclick="openLightbox(this)">
       <img src="images/racoon_jpg.jpg" alt="Racoon by Sophia — SM_art" loading="lazy">
       <div class="art-card-overlay">
         <div class="art-card-title">Raccoon</div>
@@ -421,7 +439,7 @@ footer {
       </div>
     </div>
 
-    <div class="art-card" data-category="wildlife" data-title="Green Mamba" data-medium="Acrylic on Canvas" onclick="openLightbox(this)">
+    <div class="art-card span-2 wide" data-category="wildlife" data-title="Green Mamba" data-medium="Acrylic on Canvas" onclick="openLightbox(this)">
       <img src="images/Green_Mamba.jpg.jpg" alt="Green Mamba by Sophia — SM_art" loading="lazy">
       <div class="art-card-overlay">
         <div class="art-card-title">Green Mamba</div>
@@ -429,7 +447,7 @@ footer {
       </div>
     </div>
 
-    <div class="art-card" data-category="wildlife" data-title="Zebra" data-medium="Acrylic on Canvas" onclick="openLightbox(this)">
+    <div class="art-card span-2 wide" data-category="wildlife" data-title="Zebra" data-medium="Acrylic on Canvas" onclick="openLightbox(this)">
       <img src="images/zebra.jpg.jpg" alt="Zebra by Sophia — SM_art" loading="lazy">
       <div class="art-card-overlay">
         <div class="art-card-title">Zebra</div>
@@ -438,7 +456,7 @@ footer {
     </div>
 
 
-    <div class="art-card" data-category="wildlife" data-title="Blue Giraffe" data-medium="Acrylic on Canvas" onclick="openLightbox(this)">
+    <div class="art-card span-1 tall" data-category="wildlife" data-title="Blue Giraffe" data-medium="Acrylic on Canvas" onclick="openLightbox(this)">
       <img src="images/Blue_Giraffe.jpg.jpg" alt="Blue Giraffe by Sophia — SM_art" loading="lazy">
       <div class="art-card-overlay">
         <div class="art-card-title">Blue Giraffe</div>
@@ -446,7 +464,7 @@ footer {
       </div>
     </div>
 
-    <div class="art-card" data-category="wildlife" data-title="Dachshund" data-medium="Charcoal on Paper" onclick="openLightbox(this)">
+    <div class="art-card span-1 wide" data-category="wildlife" data-title="Dachshund" data-medium="Charcoal on Paper" onclick="openLightbox(this)">
       <img src="images/Dachshund.jpg.jpg" alt="Dachshund by Sophia — SM_art" loading="lazy">
       <div class="art-card-overlay">
         <div class="art-card-title">Dachshund</div>
@@ -525,23 +543,6 @@ footer {
       </div>
     </div>
 
-
-    <div class="art-card" data-category="botanical" data-title="Black-Eyed Susan" data-medium="Acrylic on Canvas" onclick="openLightbox(this)">
-      <img src="images/Black_Eyes_Susan.jpg.jpg" alt="Black-Eyed Susan by Sophia — SM_art" loading="lazy">
-      <div class="art-card-overlay">
-        <div class="art-card-title">Black-Eyed Susan</div>
-        <div class="art-card-meta">Acrylic · 2025</div>
-      </div>
-    </div>
-
-    <div class="art-card" data-category="botanical" data-title="Poppies" data-medium="Watercolour on Paper" onclick="openLightbox(this)">
-      <img src="images/Poppies.jpg.jpg" alt="Poppies by Sophia — SM_art" loading="lazy">
-      <div class="art-card-overlay">
-        <div class="art-card-title">Poppies</div>
-        <div class="art-card-meta">Watercolour · 2024</div>
-      </div>
-    </div>
-
   </div>
 
   <!-- Watercolour -->
@@ -561,8 +562,8 @@ footer {
       </div>
     </div>
 
-    <div class="art-card" data-category="watercolour" data-title="Beta Fish" data-medium="Watercolour on Paper" onclick="openLightbox(this)">
-      <img src="images/beta_fish.jpg.jpg" alt="Beta Fish by Sophia — SM_art" loading="lazy">
+    <div class="art-card rotate-img" data-category="watercolour" data-title="Beta Fish" data-medium="Watercolour on Paper" onclick="openLightbox(this)">
+      <img src="images/beta_fish.jpg.jpg" alt="Beta Fish by Sophia — SM_art" loading="lazy" >
       <div class="art-card-badge badge-water">Watercolour</div>
       <div class="art-card-overlay">
         <div class="art-card-title">Beta Fish</div>
@@ -679,15 +680,6 @@ footer {
       <div class="art-card-overlay">
         <div class="art-card-title">Butterfly at Sunset</div>
         <div class="art-card-meta">Acrylic · 2021</div>
-      </div>
-    </div>
-
-    <div class="art-card" data-category="early" data-title="Dachshund" data-medium="Charcoal on Paper" onclick="openLightbox(this)">
-      <img src="images/Dachshund.jpg.jpg" alt="Dachshund by Sophia — SM_art" loading="lazy">
-      <div class="art-card-badge badge-charcoal">Charcoal</div>
-      <div class="art-card-overlay">
-        <div class="art-card-title">Dachshund</div>
-        <div class="art-card-meta">Charcoal · 2022</div>
       </div>
     </div>
 
@@ -820,6 +812,28 @@ document.addEventListener('keydown', e => {
   if (e.key === 'Escape') closeLightbox();
   if (e.key === 'ArrowRight') navLightbox(1);
   if (e.key === 'ArrowLeft') navLightbox(-1);
+});
+
+// Masonry grid row span calculation
+function resizeMasonryItem(item) {
+  const grid = item.closest('.gallery-grid');
+  if (!grid) return;
+  const rowHeight = parseInt(window.getComputedStyle(grid).getPropertyValue('grid-auto-rows'));
+  const rowGap = parseInt(window.getComputedStyle(grid).getPropertyValue('gap')) || 14;
+  const itemHeight = item.getBoundingClientRect().height;
+  const rowSpan = Math.ceil((itemHeight + rowGap) / (rowHeight + rowGap));
+  item.style.gridRowEnd = 'span ' + rowSpan;
+}
+
+function resizeAllMasonryItems() {
+  document.querySelectorAll('.art-card').forEach(item => resizeMasonryItem(item));
+}
+
+// Run on load and after images load
+window.addEventListener('load', resizeAllMasonryItems);
+window.addEventListener('resize', resizeAllMasonryItems);
+document.querySelectorAll('.art-card img').forEach(img => {
+  img.addEventListener('load', () => resizeMasonryItem(img.closest('.art-card')));
 });
 </script>
 </body>
