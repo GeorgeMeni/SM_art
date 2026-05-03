@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact — SM_art | Art by Sophia</title>
+<meta name="description" content="Get in touch with SM_art — enquire about original artworks, prints, calendars, corporate gifting or commissions. We'd love to hear from you.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Sans:wght@300;400;500;600&family=Pacifico&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --cream:#fdf9f4;--cream-mid:#f5ede3;
+  --cobalt:#1a5fb4;--cobalt-light:#3584e4;
+  --gold:#e5a50a;--pink:#f0187a;--pink-light:#ff4099;
+  --ink:#1c1c2e;--ink-mid:#6b6b80;
+  --serif:'Playfair Display',Georgia,serif;
+  --sans:'DM Sans',sans-serif;
+  --script:'Pacifico',cursive;
+  --dark-bg:#0c0c14;--dark-bg2:#13131f;--dark-bg3:#1a1a2e;
+}
+html{scroll-behavior:smooth;}
+body{background:var(--dark-bg);color:#f5f0e8;font-family:var(--sans);overflow-x:hidden;}
+
+/* Cursor */
+.cursor{position:fixed;width:10px;height:10px;background:var(--pink);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:transform 0.1s;}
+.cursor-ring{position:fixed;width:34px;height:34px;border:1.5px solid var(--cobalt-light);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:all 0.16s ease;}
+@media(max-width:768px){.cursor,.cursor-ring{display:none;}}
+
+/* Nav */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:14px 48px;background:rgba(12,12,20,0.96);backdrop-filter:blur(12px);border-bottom:1px solid rgba(255,255,255,0.06);}
+.nav-logo{text-decoration:none;display:flex;flex-direction:column;line-height:1;}
+.nav-logo-main{font-family:var(--script);font-size:36px;color:white;}
+.nav-logo-sub{font-family:var(--sans);font-size:9px;font-weight:500;letter-spacing:0.28em;text-transform:uppercase;color:rgba(255,255,255,0.75);margin-top:4px;}
+.nav-links{display:flex;gap:32px;align-items:center;}
+.nav-links a{font-family:var(--sans);font-size:13px;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;color:rgba(255,255,255,0.85);text-decoration:none;transition:opacity 0.2s;}
+.nav-links a:hover{opacity:1;}
+.nav-links a.active{color:white;border-bottom:1px solid var(--gold);padding-bottom:2px;}
+.nav-cta{background:var(--pink)!important;color:white!important;padding:12px 26px;border-radius:2px;box-shadow:0 4px 20px rgba(240,24,122,0.35);}
+@media(max-width:768px){nav{padding:12px 20px;}.nav-links{gap:16px;}.nav-links a{font-size:11px;}}
+
+/* Page Header */
+.page-header{padding:140px 48px 80px;background:var(--dark-bg);text-align:center;}
+.page-eyebrow{font-family:var(--sans);font-size:11px;letter-spacing:0.25em;text-transform:uppercase;color:var(--gold);margin-bottom:20px;}
+.page-title{font-family:var(--serif);font-size:clamp(48px,6vw,80px);font-weight:900;color:white;letter-spacing:-2px;line-height:1;margin-bottom:20px;}
+.page-title em{color:var(--pink);font-style:italic;}
+.page-subtitle{font-family:var(--sans);font-size:16px;color:rgba(245,240,232,0.6);max-width:480px;margin:0 auto;line-height:1.75;}
+
+/* Main Layout */
+.contact-section{padding:60px 48px 100px;background:var(--dark-bg);}
+.contact-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1.4fr;gap:80px;align-items:start;}
+@media(max-width:900px){.contact-inner{grid-template-columns:1fr;gap:48px;}.contact-section{padding:40px 24px 80px;}.page-header{padding:120px 24px 60px;}}
+
+/* Contact Info */
+.contact-info{}
+.info-block{margin-bottom:40px;}
+.info-label{font-family:var(--sans);font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-bottom:12px;font-weight:600;}
+.info-value{font-family:var(--serif);font-size:20px;font-weight:700;color:white;margin-bottom:4px;}
+.info-sub{font-family:var(--sans);font-size:14px;color:rgba(245,240,232,0.55);}
+.info-link{color:white;text-decoration:none;font-family:var(--serif);font-size:20px;font-weight:700;transition:color 0.2s;}
+.info-link:hover{color:var(--pink);}
+.info-divider{height:1px;background:rgba(255,255,255,0.08);margin:40px 0;}
+
+/* Response time */
+.response-box{background:var(--dark-bg2);border:1px solid rgba(255,255,255,0.08);border-radius:4px;padding:24px;margin-top:40px;}
+.response-box-title{font-family:var(--serif);font-size:16px;font-weight:700;color:white;margin-bottom:8px;}
+.response-box-text{font-family:var(--sans);font-size:13px;color:rgba(245,240,232,0.55);line-height:1.65;}
+
+/* What to enquire about */
+.enquiry-types{margin-top:40px;}
+.enquiry-type{display:flex;align-items:center;gap:14px;padding:14px 0;border-bottom:1px solid rgba(255,255,255,0.06);}
+.enquiry-type:last-child{border-bottom:none;}
+.enquiry-icon{font-size:20px;flex-shrink:0;}
+.enquiry-text{font-family:var(--sans);font-size:14px;color:rgba(245,240,232,0.7);}
+
+/* Form */
+.contact-form-wrap{background:var(--dark-bg2);border:1px solid rgba(255,255,255,0.08);border-radius:4px;padding:48px;}
+@media(max-width:600px){.contact-form-wrap{padding:28px 20px;}}
+.form-title{font-family:var(--serif);font-size:28px;font-weight:900;color:white;margin-bottom:8px;}
+.form-subtitle{font-family:var(--sans);font-size:14px;color:rgba(245,240,232,0.5);margin-bottom:36px;line-height:1.6;}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:20px;}
+@media(max-width:600px){.form-row{grid-template-columns:1fr;}}
+.form-group{margin-bottom:20px;}
+.form-label{display:block;font-family:var(--sans);font-size:11px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:rgba(245,240,232,0.6);margin-bottom:8px;}
+.form-input,.form-select,.form-textarea{
+  width:100%;
+  background:rgba(255,255,255,0.05);
+  border:1px solid rgba(255,255,255,0.12);
+  border-radius:2px;
+  padding:14px 16px;
+  font-family:var(--sans);
+  font-size:14px;
+  color:white;
+  transition:border-color 0.2s,background 0.2s;
+  outline:none;
+}
+.form-input::placeholder,.form-textarea::placeholder{color:rgba(245,240,232,0.3);}
+.form-input:focus,.form-select:focus,.form-textarea:focus{border-color:var(--pink);background:rgba(255,255,255,0.08);}
+.form-select{cursor:pointer;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='rgba(245,240,232,0.4)' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 16px center;}
+.form-select option{background:var(--dark-bg3);color:white;}
+.form-textarea{resize:vertical;min-height:120px;}
+.form-submit{width:100%;background:var(--pink);color:white;border:none;padding:18px 32px;font-family:var(--sans);font-weight:600;font-size:13px;letter-spacing:0.12em;text-transform:uppercase;border-radius:2px;cursor:pointer;transition:all 0.2s;margin-top:8px;}
+.form-submit:hover{background:var(--pink-light);transform:translateY(-2px);box-shadow:0 8px 24px rgba(240,24,122,0.4);}
+.form-submit:active{transform:translateY(0);}
+
+/* Success message */
+.form-success{display:none;text-align:center;padding:40px 20px;}
+.form-success-icon{font-size:48px;margin-bottom:16px;}
+.form-success-title{font-family:var(--serif);font-size:28px;font-weight:900;color:white;margin-bottom:12px;}
+.form-success-text{font-family:var(--sans);font-size:15px;color:rgba(245,240,232,0.6);line-height:1.7;}
+
+/* Footer */
+footer{background:oklch(7% 0.02 260);padding:40px 48px 32px;border-top:1px solid rgba(255,255,255,0.06);}
+.footer-bottom{max-width:1100px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;}
+.footer-copy{font-family:var(--sans);font-size:12px;color:rgba(245,240,232,0.3);}
+.footer-heart{font-family:var(--serif);font-size:12px;font-style:italic;color:rgba(245,240,232,0.3);}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px);}to{opacity:1;transform:translateY(0);}}
+.fade-up{animation:fadeUp 0.7s ease both;}
+</style>
+</head>
+<body>
+<div class="cursor" id="cur"></div>
+<div class="cursor-ring" id="curR"></div>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-logo">
+    <span class="nav-logo-main">SM_art</span>
+    <span class="nav-logo-sub">Art by Sophia</span>
+  </a>
+  <div class="nav-links">
+    <a href="gallery.html">Gallery</a>
+    <a href="index.html#shop">Shop</a>
+    <a href="index.html#sophia">Sophia's Story</a>
+    <a href="index.html#corporate">Corporate</a>
+    <a href="contact.html" class="active">Contact</a>
+    <a href="index.html#shop" class="nav-cta">Shop Now</a>
+  </div>
+</nav>
+
+<!-- PAGE HEADER -->
+<div class="page-header fade-up">
+  <div class="page-eyebrow">Get in Touch</div>
+  <h1 class="page-title">Let's talk <em>art.</em></h1>
+  <p class="page-subtitle">Whether you're after an original painting, a corporate gift order, or just want to say hello — we'd love to hear from you.</p>
+</div>
+
+<!-- CONTACT SECTION -->
+<section class="contact-section">
+  <div class="contact-inner">
+
+    <!-- LEFT: Contact Info -->
+    <div class="contact-info fade-up">
+
+      <div class="info-block">
+        <div class="info-label">Call or WhatsApp</div>
+        <a href="tel:+27823366024" class="info-link">+27 82 336 6024</a>
+        <div class="info-sub">Sancha · Monday to Saturday · 8am – 6pm</div>
+      </div>
+
+      <div class="info-divider"></div>
+
+      <div class="info-block">
+        <div class="info-label">Email Us</div>
+        <a href="mailto:artbysophiam@gmail.com" class="info-link">artbysophiam@gmail.com</a>
+        <div class="info-sub">We typically respond within 24 hours</div>
+      </div>
+
+      <div class="info-divider"></div>
+
+      <div class="info-block">
+        <div class="info-label">Based In</div>
+        <div class="info-value">Gauteng, South Africa</div>
+        <div class="info-sub">Delivery available nationwide</div>
+      </div>
+
+      <div class="response-box">
+        <div class="response-box-title">⏱ Response Time</div>
+        <div class="response-box-text">We aim to respond to all enquiries within 24 hours during business days. For urgent orders or corporate quotes, WhatsApp is the fastest way to reach us.</div>
+      </div>
+
+      <div class="enquiry-types">
+        <div class="info-label" style="margin-top:32px;">We Can Help With</div>
+        <div class="enquiry-type"><span class="enquiry-icon">🎨</span><span class="enquiry-text">Original artwork enquiries & commissions</span></div>
+        <div class="enquiry-type"><span class="enquiry-icon">🖼️</span><span class="enquiry-text">Print and product orders</span></div>
+        <div class="enquiry-type"><span class="enquiry-icon">📅</span><span class="enquiry-text">Corporate calendar & gifting orders</span></div>
+        <div class="enquiry-type"><span class="enquiry-icon">🎁</span><span class="enquiry-text">Wholesale & stockist enquiries</span></div>
+        <div class="enquiry-type"><span class="enquiry-icon">📸</span><span class="enquiry-text">Media, press & collaboration requests</span></div>
+      </div>
+
+    </div>
+
+    <!-- RIGHT: Contact Form -->
+    <div class="contact-form-wrap fade-up">
+      <div class="form-title">Send us a message</div>
+      <div class="form-subtitle">Fill in the form below and Sancha will get back to you as soon as possible.</div>
+
+      <!-- Success message (shown after submit) -->
+      <div class="form-success" id="form-success">
+        <div class="form-success-icon">🎨</div>
+        <div class="form-success-title">Message sent!</div>
+        <div class="form-success-text">Thank you for reaching out. Sancha will be in touch within 24 hours. In the meantime, browse the full gallery.</div>
+        <a href="gallery.html" style="display:inline-block;margin-top:24px;background:var(--pink);color:white;padding:14px 28px;font-family:var(--sans);font-size:12px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;text-decoration:none;border-radius:2px;">View Gallery</a>
+      </div>
+
+      <!-- The form -->
+      <form id="contact-form" action="https://formspree.io/f/xlgzgpwo" method="POST">
+
+        <!-- Hidden field - redirect back to thank you on same page -->
+        <input type="hidden" name="_next" value="https://georgemeni.github.io/sm-art/contact.html?success=true">
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="name">Your Name *</label>
+            <input class="form-input" type="text" id="name" name="name" placeholder="Jane Smith" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="email">Email Address *</label>
+            <input class="form-input" type="email" id="email" name="email" placeholder="jane@example.com" required>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="phone">Phone / WhatsApp</label>
+            <input class="form-input" type="tel" id="phone" name="phone" placeholder="+27 82 000 0000">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="enquiry">Enquiry Type *</label>
+            <select class="form-select" id="enquiry" name="enquiry" required>
+              <option value="" disabled selected>Select an option</option>
+              <option value="Original Artwork">Original Artwork</option>
+              <option value="Commission">Commission a Painting</option>
+              <option value="Prints & Products">Prints & Products</option>
+              <option value="Corporate Gifting">Corporate Gifting</option>
+              <option value="Calendar Order">Calendar Order</option>
+              <option value="Wholesale">Wholesale / Stockist</option>
+              <option value="Media & Press">Media & Press</option>
+              <option value="General">General Enquiry</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="subject">Subject *</label>
+          <input class="form-input" type="text" id="subject" name="subject" placeholder="e.g. Enquiry about Cheetah original" required>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="message">Your Message *</label>
+          <textarea class="form-textarea" id="message" name="message" placeholder="Tell us what you're looking for, any specific pieces you're interested in, quantities for corporate orders, etc." required></textarea>
+        </div>
+
+        <button type="submit" class="form-submit">Send Message →</button>
+
+      </form>
+    </div>
+
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-bottom">
+    <span class="footer-copy">© 2026 SM_art by Sophia. All rights reserved.</span>
+    <span class="footer-heart">Made with paint, passion & a whole lot of joy.</span>
+  </div>
+</footer>
+
+<script>
+// Custom cursor
+const cur = document.getElementById('cur');
+const curR = document.getElementById('curR');
+document.addEventListener('mousemove', e => {
+  cur.style.left = e.clientX + 'px';
+  cur.style.top = e.clientY + 'px';
+  curR.style.left = e.clientX + 'px';
+  curR.style.top = e.clientY + 'px';
+});
+document.querySelectorAll('a, button, input, select, textarea').forEach(el => {
+  el.addEventListener('mouseenter', () => {
+    cur.style.transform = 'translate(-50%,-50%) scale(2)';
+    curR.style.transform = 'translate(-50%,-50%) scale(1.5)';
+  });
+  el.addEventListener('mouseleave', () => {
+    cur.style.transform = 'translate(-50%,-50%) scale(1)';
+    curR.style.transform = 'translate(-50%,-50%) scale(1)';
+  });
+});
+
+// Show success message if redirected back after submit
+if (window.location.search.includes('success=true')) {
+  document.getElementById('contact-form').style.display = 'none';
+  document.getElementById('form-success').style.display = 'block';
+}
+</script>
+</body>
+</html>
