@@ -5,713 +5,331 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>SM_art — Art by Sophia | Young South African Artist</title>
 <meta name="description" content="SM_art is the online home of Sophia, a talented young South African artist. Original paintings, prints and calendars. Winner of the Ambassadors Award at the National Eisteddfod.">
-<meta property="og:title" content="SM_art — Art by Sophia">
-<meta property="og:description" content="Original artwork by a young South African artist. Wildlife, portraits, botanicals and watercolour.">
-<meta property="og:type" content="website">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,400;1,700&family=DM+Sans:wght@300;400;500;600&family=Pacifico&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --bg:      #0e0e0e;
-    --bg2:     #141414;
-    --bg3:     #1a1a1a;
-    --accent:  #e91e8c;
-    --accent2: #ff6b9d;
-    --text:    #f0f0f0;
-    --muted:   #888;
-    --border:  rgba(255,255,255,0.07);
-    --radius:  10px;
-  }
-
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-  body {
-    background: var(--bg);
-    color: var(--text);
-    font-family: 'Inter', sans-serif;
-    font-weight: 300;
-  }
-
-  /* ─── NAV ─── */
-  nav {
-    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-    display: flex; align-items: center; justify-content: space-between;
-    padding: 0 40px; height: 64px;
-    background: rgba(14,14,14,0.96);
-    backdrop-filter: blur(12px);
-    border-bottom: 1px solid var(--border);
-  }
-  .nav-logo { display: flex; flex-direction: column; line-height: 1; text-decoration: none; }
-  .nav-logo-main {
-    font-family: 'Playfair Display', serif; font-style: italic;
-    font-size: 1.35rem; color: var(--text); letter-spacing: -0.5px;
-  }
-  .nav-logo-sub { font-size: 0.6rem; letter-spacing: 0.18em; color: var(--muted); text-transform: uppercase; margin-top: 2px; }
-  .nav-links { display: flex; align-items: center; gap: 32px; list-style: none; }
-  .nav-links a {
-    color: var(--muted); text-decoration: none;
-    font-size: 0.78rem; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 500;
-    transition: color 0.2s;
-  }
-  .nav-links a:hover { color: var(--text); }
-  .nav-cta {
-    background: var(--accent); color: #fff;
-    padding: 8px 20px; border-radius: 4px;
-    font-size: 0.72rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase;
-    text-decoration: none; transition: background 0.2s;
-  }
-  .nav-cta:hover { background: var(--accent2); color: #fff; }
-
-  /* ─── HERO ─── */
-  .hero {
-    margin-top: 64px;
-    min-height: calc(100vh - 64px);
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-  }
-
-  .hero-left {
-    display: flex; flex-direction: column; justify-content: center;
-    padding: 80px 60px 80px 80px;
-    background: var(--bg2);
-    position: relative;
-  }
-
-  .hero-eyebrow {
-    font-size: 0.68rem; letter-spacing: 0.25em; text-transform: uppercase;
-    color: var(--accent); margin-bottom: 24px; font-weight: 500;
-  }
-
-  .hero-title {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(2.4rem, 4vw, 3.8rem);
-    line-height: 1.08; font-weight: 400;
-    margin-bottom: 28px;
-  }
-  .hero-title em { font-style: italic; color: var(--accent2); }
-
-  .hero-subtitle {
-    font-size: 0.95rem; color: var(--muted); line-height: 1.85;
-    max-width: 460px; margin-bottom: 48px;
-  }
-
-  .hero-badges {
-    display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 48px;
-  }
-  .badge {
-    border: 1px solid var(--border);
-    padding: 6px 14px; border-radius: 20px;
-    font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase;
-    color: var(--muted); font-weight: 500;
-  }
-  .badge-hot { border-color: rgba(233,30,140,0.4); color: var(--accent2); }
-
-  .hero-ctas { display: flex; gap: 16px; align-items: center; }
-  .btn-primary {
-    background: var(--accent); color: #fff;
-    padding: 14px 32px; border-radius: 5px;
-    font-size: 0.78rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase;
-    text-decoration: none; transition: background 0.2s, transform 0.2s;
-    display: inline-block;
-  }
-  .btn-primary:hover { background: var(--accent2); transform: translateY(-1px); }
-  .btn-secondary {
-    color: var(--muted); font-size: 0.78rem; letter-spacing: 0.1em; text-transform: uppercase;
-    text-decoration: none; font-weight: 500;
-    display: flex; align-items: center; gap: 8px;
-    transition: color 0.2s;
-  }
-  .btn-secondary:hover { color: var(--text); }
-  .btn-secondary::after { content: '→'; }
-
-  .hero-right {
-    position: relative; overflow: hidden;
-    background: var(--bg3);
-  }
-  .hero-right img {
-    width: 100%; height: 100%;
-    object-fit: cover; object-position: center;
-    display: block;
-  }
-  .hero-right-overlay {
-    position: absolute; inset: 0;
-    background: linear-gradient(135deg, rgba(233,30,140,0.08) 0%, transparent 60%);
-    pointer-events: none;
-  }
-  .hero-credit {
-    position: absolute; bottom: 24px; right: 24px;
-    font-size: 0.62rem; color: rgba(255,255,255,0.45); letter-spacing: 0.1em;
-    text-transform: uppercase;
-  }
-
-  /* ─── MARQUEE ─── */
-  .marquee-strip {
-    background: var(--accent);
-    padding: 14px 0; overflow: hidden;
-    white-space: nowrap;
-  }
-  .marquee-track {
-    display: inline-flex; gap: 0;
-    animation: marquee 28s linear infinite;
-  }
-  .marquee-item {
-    display: inline-flex; align-items: center; gap: 16px;
-    font-size: 0.7rem; font-weight: 600; letter-spacing: 0.18em;
-    text-transform: uppercase; color: #fff; padding: 0 32px;
-  }
-  .marquee-dot { width: 4px; height: 4px; background: rgba(255,255,255,0.5); border-radius: 50%; }
-  @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
-
-  /* ─── STATS ROW ─── */
-  .stats-row {
-    background: var(--bg2);
-    border-bottom: 1px solid var(--border);
-    display: grid; grid-template-columns: repeat(4, 1fr);
-  }
-  .stat-item {
-    padding: 40px 32px;
-    border-right: 1px solid var(--border);
-    text-align: center;
-  }
-  .stat-item:last-child { border-right: none; }
-  .stat-num {
-    font-family: 'Playfair Display', serif;
-    font-size: 2.4rem; font-weight: 600; color: var(--text);
-    display: block; margin-bottom: 8px;
-  }
-  .stat-label { font-size: 0.68rem; color: var(--muted); letter-spacing: 0.12em; text-transform: uppercase; }
-
-  /* ─── ABOUT ─── */
-  .about {
-    display: grid; grid-template-columns: 1fr 1fr;
-    min-height: 600px;
-  }
-  .about-image {
-    position: relative; overflow: hidden;
-    background: var(--bg3);
-    min-height: 480px;
-  }
-  .about-image img {
-    width: 100%; height: 100%;
-    object-fit: cover; object-position: center top;
-    display: block;
-  }
-  .about-text {
-    padding: 80px 60px;
-    display: flex; flex-direction: column; justify-content: center;
-    background: var(--bg2);
-  }
-  .section-eyebrow {
-    font-size: 0.68rem; letter-spacing: 0.25em; text-transform: uppercase;
-    color: var(--accent); margin-bottom: 20px; font-weight: 500;
-  }
-  .section-title {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(1.6rem, 2.5vw, 2.4rem);
-    line-height: 1.15; font-weight: 400; margin-bottom: 24px;
-  }
-  .section-title em { font-style: italic; color: var(--accent2); }
-  .about-body {
-    font-size: 0.88rem; color: var(--muted); line-height: 1.85;
-    margin-bottom: 16px;
-  }
-  .about-body strong { color: var(--text); font-weight: 500; }
-  .about-link {
-    display: inline-flex; align-items: center; gap: 8px;
-    color: var(--accent2); font-size: 0.8rem; font-weight: 500;
-    text-decoration: none; margin-top: 20px;
-    transition: gap 0.2s;
-  }
-  .about-link:hover { gap: 12px; }
-
-  .achievements {
-    margin-top: 36px; display: flex; flex-direction: column; gap: 14px;
-  }
-  .achievement {
-    display: flex; align-items: flex-start; gap: 14px;
-    padding: 16px; background: var(--bg3); border-radius: 8px;
-    border: 1px solid var(--border);
-  }
-  .achievement-icon { font-size: 1.2rem; flex-shrink: 0; margin-top: 2px; }
-  .achievement-title { font-size: 0.82rem; color: var(--text); font-weight: 500; margin-bottom: 4px; }
-  .achievement-desc { font-size: 0.72rem; color: var(--muted); line-height: 1.6; }
-
-  /* ─── GALLERY PREVIEW ─── */
-  .gallery-preview {
-    padding: 80px 40px;
-    background: var(--bg);
-  }
-  .section-header {
-    display: flex; justify-content: space-between; align-items: flex-end;
-    margin-bottom: 40px;
-  }
-  .section-header-left {}
-  .see-all {
-    color: var(--accent2); font-size: 0.78rem; font-weight: 500;
-    text-decoration: none; letter-spacing: 0.08em;
-    display: flex; align-items: center; gap: 6px;
-    transition: gap 0.2s;
-  }
-  .see-all:hover { gap: 10px; }
-
-  .preview-grid {
-    display: grid;
-    grid-template-columns: 2fr 1fr 1fr;
-    grid-template-rows: 320px 260px;
-    gap: 10px;
-  }
-  .preview-card {
-    position: relative; overflow: hidden; border-radius: 8px;
-    cursor: pointer; background: var(--bg3);
-    text-decoration: none; display: block;
-  }
-  .preview-card:first-child {
-    grid-row: span 2;
-  }
-  .preview-card img {
-    width: 100%; height: 100%;
-    object-fit: cover;
-    transition: transform 0.5s cubic-bezier(0.25,0.46,0.45,0.94);
-    display: block;
-  }
-  .preview-card:hover img { transform: scale(1.05); }
-  .preview-card-label {
-    position: absolute; bottom: 0; left: 0; right: 0;
-    padding: 16px 14px 12px;
-    background: linear-gradient(transparent, rgba(0,0,0,0.8));
-    opacity: 0; transition: opacity 0.3s;
-  }
-  .preview-card:hover .preview-card-label { opacity: 1; }
-  .preview-label-title {
-    font-family: 'Playfair Display', serif; font-style: italic;
-    font-size: 0.88rem; color: #fff;
-  }
-  .preview-label-meta { font-size: 0.62rem; color: rgba(255,255,255,0.6); margin-top: 3px; }
-
-  /* ─── PRODUCTS ─── */
-  .products {
-    padding: 80px 40px;
-    background: var(--bg2);
-  }
-  .products-grid {
-    display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
-    margin-top: 48px;
-  }
-  .product-card {
-    background: var(--bg3); border-radius: 10px;
-    border: 1px solid var(--border);
-    overflow: hidden; transition: transform 0.2s, border-color 0.2s;
-  }
-  .product-card:hover { transform: translateY(-4px); border-color: rgba(233,30,140,0.3); }
-  .product-img {
-    height: 220px; overflow: hidden;
-    background: var(--bg);
-  }
-  .product-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
-  .product-img-placeholder {
-    width: 100%; height: 100%;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 3rem; color: var(--border);
-  }
-  .product-info { padding: 24px; }
-  .product-name { font-size: 0.95rem; font-weight: 500; color: var(--text); margin-bottom: 8px; }
-  .product-desc { font-size: 0.78rem; color: var(--muted); line-height: 1.7; margin-bottom: 16px; }
-  .product-price { font-size: 1rem; color: var(--accent2); font-weight: 500; margin-bottom: 16px; }
-  .product-btn {
-    display: inline-block; padding: 9px 20px;
-    border: 1px solid rgba(233,30,140,0.4); border-radius: 4px;
-    font-size: 0.7rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase;
-    color: var(--accent2); text-decoration: none;
-    transition: background 0.2s, color 0.2s;
-  }
-  .product-btn:hover { background: var(--accent); color: #fff; border-color: var(--accent); }
-
-  /* ─── CORPORATE BAND ─── */
-  .corporate-band {
-    padding: 80px 40px;
-    background: var(--bg);
-    display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center;
-  }
-  .corp-text .section-title { margin-bottom: 20px; }
-  .corp-body { font-size: 0.88rem; color: var(--muted); line-height: 1.85; margin-bottom: 32px; }
-  .corp-features { display: flex; flex-direction: column; gap: 12px; margin-bottom: 36px; }
-  .corp-feature {
-    display: flex; align-items: center; gap: 12px;
-    font-size: 0.82rem; color: var(--muted);
-  }
-  .corp-feature::before {
-    content: ''; width: 6px; height: 6px; border-radius: 50%;
-    background: var(--accent); flex-shrink: 0;
-  }
-  .corp-image { border-radius: 10px; overflow: hidden; }
-  .corp-image img { width: 100%; display: block; }
-
-  /* ─── FOOTER ─── */
-  footer {
-    background: var(--bg2);
-    border-top: 1px solid var(--border);
-    padding: 60px 40px 32px;
-  }
-  .footer-top {
-    display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px;
-    margin-bottom: 48px;
-  }
-  .footer-brand-name {
-    font-family: 'Playfair Display', serif; font-style: italic;
-    font-size: 1.4rem; color: var(--text); margin-bottom: 12px; display: block;
-  }
-  .footer-brand-desc { font-size: 0.78rem; color: var(--muted); line-height: 1.8; margin-bottom: 24px; }
-  .footer-social { display: flex; gap: 14px; }
-  .social-link {
-    width: 36px; height: 36px; border-radius: 50%;
-    border: 1px solid var(--border); display: flex; align-items: center; justify-content: center;
-    color: var(--muted); text-decoration: none; font-size: 0.8rem;
-    transition: border-color 0.2s, color 0.2s;
-  }
-  .social-link:hover { border-color: var(--accent); color: var(--accent); }
-  .footer-col-title {
-    font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase;
-    color: var(--muted); margin-bottom: 20px; font-weight: 600;
-  }
-  .footer-links { list-style: none; display: flex; flex-direction: column; gap: 12px; }
-  .footer-links a {
-    color: var(--muted); text-decoration: none; font-size: 0.8rem;
-    transition: color 0.2s;
-  }
-  .footer-links a:hover { color: var(--text); }
-  .footer-bottom {
-    border-top: 1px solid var(--border); padding-top: 24px;
-    display: flex; justify-content: space-between; align-items: center;
-  }
-  .footer-copy { font-size: 0.7rem; color: var(--muted); }
-  .footer-copy a { color: var(--muted); text-decoration: none; }
-  .footer-copy a:hover { color: var(--text); }
-
-  /* ─── RESPONSIVE ─── */
-  @media (max-width: 1024px) {
-    .stats-row { grid-template-columns: repeat(2, 1fr); }
-    .preview-grid { grid-template-columns: 1fr 1fr; grid-template-rows: auto; }
-    .preview-card:first-child { grid-row: span 1; }
-    .products-grid { grid-template-columns: repeat(2, 1fr); }
-    .footer-top { grid-template-columns: 1fr 1fr; }
-  }
-  @media (max-width: 768px) {
-    nav { padding: 0 20px; }
-    .nav-links { display: none; }
-    .hero { grid-template-columns: 1fr; }
-    .hero-left { padding: 60px 24px; }
-    .hero-right { height: 300px; }
-    .about { grid-template-columns: 1fr; }
-    .about-image { min-height: 300px; }
-    .about-text { padding: 48px 24px; }
-    .gallery-preview { padding: 60px 20px; }
-    .products { padding: 60px 20px; }
-    .products-grid { grid-template-columns: 1fr; }
-    .corporate-band { grid-template-columns: 1fr; padding: 60px 20px; gap: 40px; }
-    .footer-top { grid-template-columns: 1fr; }
-    footer { padding: 48px 20px 24px; }
-    .footer-bottom { flex-direction: column; gap: 12px; text-align: center; }
-    .preview-grid { grid-template-columns: 1fr 1fr; }
-    .stats-row { grid-template-columns: repeat(2, 1fr); }
-  }
+:root{--pink:#f0187a;--pink-light:#ff4fa3;--gold:#c9a84c;--gold-light:#e8c97a;--cobalt:#1a56db;--cobalt-light:#60a5fa;--dark-bg:#0a0a0f;--dark-bg2:#0f0f18;--dark-bg3:#13131e;--serif:'Playfair Display',Georgia,serif;--sans:'DM Sans',system-ui,sans-serif;--script:'Pacifico',cursive;}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:var(--dark-bg);color:#f5f0e8;font-family:var(--sans);overflow-x:hidden;}
+.cursor{position:fixed;width:8px;height:8px;background:var(--pink);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:transform 0.1s;}
+.cursor-ring{position:fixed;width:32px;height:32px;border:1.5px solid rgba(240,24,122,0.5);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:transform 0.12s;}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 48px;height:64px;background:rgba(10,10,15,0.95);backdrop-filter:blur(16px);border-bottom:1px solid rgba(255,255,255,0.06);}
+.nav-logo{display:flex;flex-direction:column;line-height:1;text-decoration:none;}
+.nav-logo-main{font-family:var(--serif);font-style:italic;font-size:22px;color:#f5f0e8;letter-spacing:-0.5px;}
+.nav-logo-sub{font-family:var(--sans);font-size:9px;letter-spacing:0.2em;color:rgba(245,240,232,0.4);text-transform:uppercase;margin-top:3px;}
+.nav-links{display:flex;align-items:center;gap:36px;}
+.nav-links a{font-family:var(--sans);font-size:12px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:rgba(245,240,232,0.6);text-decoration:none;transition:color 0.2s;}
+.nav-links a:hover{color:#f5f0e8;}
+.nav-cta{background:var(--pink)!important;color:white!important;padding:10px 22px;border-radius:2px;transition:background 0.2s!important;}
+.nav-cta:hover{background:var(--pink-light)!important;}
+.hero{position:relative;min-height:100vh;display:flex;align-items:center;padding-top:64px;overflow:hidden;}
+.hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 70% 50%,rgba(26,86,219,0.12) 0%,transparent 65%),radial-gradient(ellipse 50% 80% at 85% 20%,rgba(240,24,122,0.08) 0%,transparent 60%),var(--dark-bg);}
+.hero-overlay{position:absolute;inset:0;background:linear-gradient(to right,rgba(10,10,15,0.92) 0%,rgba(10,10,15,0.6) 50%,rgba(10,10,15,0.1) 100%);}
+.hero-content{position:relative;z-index:2;padding:0 48px;max-width:680px;}
+.hero-eyebrow{font-family:var(--sans);font-size:11px;letter-spacing:0.25em;text-transform:uppercase;color:var(--gold);margin-bottom:28px;animation:fadeUp 0.8s ease both;}
+.hero-title{font-family:var(--serif);font-size:clamp(52px,7vw,96px);font-weight:900;line-height:0.95;letter-spacing:-2px;color:#f5f0e8;margin-bottom:28px;animation:fadeUp 0.8s 0.1s ease both;}
+.hero-title em{font-style:italic;color:var(--gold);}
+.hero-desc{font-family:var(--sans);font-size:16px;line-height:1.75;color:rgba(245,240,232,0.65);max-width:480px;margin-bottom:40px;animation:fadeUp 0.8s 0.2s ease both;}
+.hero-desc strong{color:#f5f0e8;}
+.hero-buttons{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:56px;animation:fadeUp 0.8s 0.3s ease both;}
+.btn-white{display:inline-block;background:#f5f0e8;color:#0a0a0f;padding:16px 36px;font-family:var(--sans);font-weight:600;font-size:12px;letter-spacing:0.12em;text-transform:uppercase;text-decoration:none;border-radius:2px;transition:all 0.2s;}
+.btn-white:hover{background:white;transform:translateY(-2px);box-shadow:0 8px 32px rgba(245,240,232,0.2);}
+.btn-outline-white{display:inline-block;border:1px solid rgba(245,240,232,0.3);color:#f5f0e8;padding:16px 36px;font-family:var(--sans);font-weight:500;font-size:12px;letter-spacing:0.12em;text-transform:uppercase;text-decoration:none;border-radius:2px;transition:all 0.2s;}
+.btn-outline-white:hover{border-color:#f5f0e8;background:rgba(245,240,232,0.05);}
+.hero-awards{display:flex;gap:32px;flex-wrap:wrap;animation:fadeUp 0.8s 0.4s ease both;}
+.award-item{display:flex;flex-direction:column;gap:4px;}
+.award-icon{font-size:20px;}
+.award-title{font-family:var(--sans);font-size:12px;font-weight:600;color:#f5f0e8;}
+.award-sub{font-family:var(--sans);font-size:10px;color:rgba(245,240,232,0.45);letter-spacing:0.05em;}
+.hero-logo-mark{position:absolute;right:48px;top:50%;transform:translateY(-50%);width:min(420px,40vw);opacity:0.12;animation:fadeIn 1.2s 0.5s ease both;pointer-events:none;}
+.hero-logo-mark img{width:100%;height:auto;}
+.marquee-strip{background:var(--pink);padding:14px 0;overflow:hidden;white-space:nowrap;}
+.marquee-track{display:inline-block;animation:marquee 30s linear infinite;}
+.marquee-track span{font-family:var(--sans);font-size:11px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:white;padding:0 48px;}
+.about-section{padding:100px 48px;background:var(--dark-bg2);}
+.about-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;}
+.about-images{position:relative;}
+.about-img-main{width:100%;height:480px;object-fit:cover;border-radius:3px;display:block;}
+.about-img-secondary{position:absolute;bottom:-32px;right:-32px;width:200px;height:200px;object-fit:cover;border-radius:3px;border:4px solid var(--dark-bg2);}
+.about-img-feature{margin-top:16px;position:relative;}
+.about-img-feature img{width:100%;height:200px;object-fit:cover;border-radius:3px;display:block;}
+.about-img-caption{font-family:var(--sans);font-size:11px;font-style:italic;color:rgba(245,240,232,0.4);margin-top:8px;line-height:1.5;}
+.about-eyebrow{font-family:var(--sans);font-size:11px;letter-spacing:0.22em;text-transform:uppercase;color:var(--gold);margin-bottom:16px;}
+.about-title{font-family:var(--serif);font-size:clamp(32px,3.5vw,52px);font-weight:900;line-height:1.05;letter-spacing:-1px;color:#f5f0e8;margin-bottom:24px;}
+.about-title em{font-style:italic;color:var(--gold);}
+.about-body{font-family:var(--sans);font-size:15px;line-height:1.8;color:rgba(245,240,232,0.65);margin-bottom:16px;}
+.about-body strong{color:#f5f0e8;font-weight:600;}
+.about-values{display:flex;flex-wrap:wrap;gap:8px;margin-top:28px;}
+.value-tag{font-family:var(--sans);font-size:11px;font-weight:500;letter-spacing:0.08em;padding:6px 14px;border:1px solid rgba(201,168,76,0.3);border-radius:2px;color:var(--gold-light);}
+@media(max-width:900px){.about-inner{grid-template-columns:1fr;}.about-img-secondary{display:none;}.about-section{padding:60px 24px;}}
+.gallery-section{padding:100px 48px;background:var(--dark-bg);}
+.gallery-inner{max-width:1200px;margin:0 auto;}
+.section-header{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:48px;}
+.section-eyebrow{font-family:var(--sans);font-size:11px;letter-spacing:0.22em;text-transform:uppercase;color:var(--gold);margin-bottom:12px;}
+.section-title{font-family:var(--serif);font-size:clamp(28px,3vw,44px);font-weight:900;color:#f5f0e8;letter-spacing:-1px;line-height:1.1;}
+.section-title em{font-style:italic;color:var(--gold);}
+.view-all{font-family:var(--sans);font-size:12px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:rgba(245,240,232,0.5);text-decoration:none;border-bottom:1px solid rgba(245,240,232,0.2);padding-bottom:3px;transition:color 0.2s,border-color 0.2s;}
+.view-all:hover{color:#f5f0e8;border-color:#f5f0e8;}
+.gallery-grid{display:grid;grid-template-columns:repeat(4,1fr);grid-template-rows:280px 220px;gap:10px;}
+.gallery-item{position:relative;overflow:hidden;border-radius:3px;cursor:pointer;background:var(--dark-bg3);}
+.gallery-item:nth-child(1){grid-column:1/3;grid-row:1/2;}
+.gallery-item:nth-child(2){grid-column:3/4;}
+.gallery-item:nth-child(3){grid-column:4/5;}
+.gallery-item:nth-child(4){grid-column:1/2;}
+.gallery-item:nth-child(5){grid-column:2/4;}
+.gallery-item:nth-child(6){grid-column:4/5;}
+.gallery-item img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 0.6s cubic-bezier(0.25,0.46,0.45,0.94);}
+.gallery-item:hover img{transform:scale(1.06);}
+.gallery-item-info{position:absolute;bottom:0;left:0;right:0;padding:20px;background:linear-gradient(transparent,rgba(0,0,0,0.75));transform:translateY(12px);opacity:0;transition:all 0.3s ease;}
+.gallery-item:hover .gallery-item-info{transform:translateY(0);opacity:1;}
+.gallery-item-cat{font-family:var(--sans);font-size:10px;letter-spacing:0.15em;text-transform:uppercase;color:var(--gold);margin-bottom:4px;}
+.gallery-item-title{font-family:var(--serif);font-size:18px;font-weight:700;color:white;}
+.gallery-item-enquire{position:absolute;top:16px;right:16px;background:white;color:var(--pink);padding:6px 14px;font-family:var(--sans);font-size:10px;letter-spacing:0.1em;text-transform:uppercase;font-weight:500;border-radius:2px;opacity:0;transition:opacity 0.3s ease;}
+.gallery-item:hover .gallery-item-enquire{opacity:1;}
+@media(max-width:768px){.gallery-grid{grid-template-columns:1fr 1fr;grid-template-rows:auto;}.gallery-item{grid-column:auto!important;grid-row:auto!important;height:200px;}.gallery-section{padding:60px 24px;}}
+.products-section{padding:100px 48px;background:var(--dark-bg2);}
+.products-inner{max-width:1200px;margin:0 auto;}
+.products-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;}
+.product-card{border-radius:3px;overflow:hidden;background:var(--dark-bg3);transition:transform 0.3s,box-shadow 0.3s;}
+.product-card:hover{transform:translateY(-6px);box-shadow:0 20px 60px rgba(0,0,0,0.4);}
+.product-card-img{width:100%;height:220px;object-fit:cover;display:block;}
+.product-card-body{padding:20px;}
+.product-tag{font-family:var(--sans);font-size:9px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--pink);margin-bottom:8px;}
+.product-name{font-family:var(--serif);font-size:18px;font-weight:700;color:white;margin-bottom:8px;}
+.product-desc{font-family:var(--sans);font-size:13px;color:rgba(245,240,232,0.55);line-height:1.6;margin-bottom:16px;}
+.product-enquire{display:inline-block;font-family:var(--sans);font-size:11px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--cobalt-light);text-decoration:none;border-bottom:1px solid var(--cobalt-light);padding-bottom:2px;}
+@media(max-width:900px){.products-grid{grid-template-columns:1fr 1fr;}.products-section{padding:60px 24px;}}
+@media(max-width:480px){.products-grid{grid-template-columns:1fr;}}
+.corporate-section{padding:80px 48px;background:var(--dark-bg3);border-top:1px solid rgba(255,255,255,0.06);border-bottom:1px solid rgba(255,255,255,0.06);}
+.corporate-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;}
+.corporate-eyebrow{font-family:var(--sans);font-size:11px;letter-spacing:0.22em;text-transform:uppercase;color:var(--gold);margin-bottom:16px;}
+.corporate-title{font-family:var(--serif);font-size:clamp(28px,3vw,44px);font-weight:900;color:white;letter-spacing:-1px;line-height:1.1;margin-bottom:20px;}
+.corporate-body{font-family:var(--sans);font-size:15px;line-height:1.75;color:rgba(245,240,232,0.65);margin-bottom:32px;}
+.corporate-features{list-style:none;margin-bottom:36px;}
+.corporate-features li{font-family:var(--sans);font-size:14px;color:rgba(245,240,232,0.7);padding:8px 0;border-bottom:1px solid rgba(255,255,255,0.06);display:flex;align-items:center;gap:12px;}
+.corporate-features li::before{content:'✓';color:var(--gold);font-weight:700;flex-shrink:0;}
+.btn-pink{display:inline-block;background:var(--pink);color:white;padding:16px 32px;font-family:var(--sans);font-weight:600;font-size:12px;letter-spacing:0.12em;text-transform:uppercase;text-decoration:none;border-radius:2px;transition:all 0.2s;}
+.btn-pink:hover{background:var(--pink-light);transform:translateY(-2px);box-shadow:0 8px 24px rgba(240,24,122,0.4);}
+.corporate-calendar{background:var(--dark-bg2);border-radius:4px;padding:32px;border:1px solid rgba(255,255,255,0.08);}
+.corp-cal-title{font-family:var(--serif);font-size:22px;font-weight:700;color:white;margin-bottom:24px;}
+.corp-cal-item{display:flex;justify-content:space-between;align-items:center;padding:14px 0;border-bottom:1px solid rgba(255,255,255,0.06);}
+.corp-cal-item:last-child{border-bottom:none;}
+.corp-cal-name{font-family:var(--sans);font-size:14px;color:rgba(245,240,232,0.8);}
+.corp-cal-price{font-family:var(--serif);font-size:18px;font-weight:700;color:var(--gold);}
+@media(max-width:900px){.corporate-inner{grid-template-columns:1fr;}.corporate-section{padding:60px 24px;}}
+footer{background:#060609;padding:60px 48px 32px;}
+.footer-inner{max-width:1200px;margin:0 auto;}
+.footer-top{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px;margin-bottom:48px;}
+.footer-logo{font-family:var(--serif);font-style:italic;font-size:32px;color:white;margin-bottom:8px;display:block;}
+.footer-tagline{font-family:var(--sans);font-size:13px;color:rgba(245,240,232,0.5);line-height:1.6;max-width:260px;margin-bottom:24px;}
+.footer-social{display:flex;gap:12px;}
+.social-link{width:36px;height:36px;border:1px solid rgba(255,255,255,0.15);border-radius:2px;display:flex;align-items:center;justify-content:center;text-decoration:none;color:rgba(245,240,232,0.5);font-size:14px;transition:all 0.2s;}
+.social-link:hover{border-color:var(--pink);color:var(--pink);}
+.footer-col-title{font-family:var(--sans);font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:var(--gold);margin-bottom:16px;}
+.footer-col a{display:block;font-family:var(--sans);font-size:13px;color:rgba(245,240,232,0.45);text-decoration:none;margin-bottom:10px;transition:color 0.2s;}
+.footer-col a:hover{color:white;}
+.footer-bottom{border-top:1px solid rgba(255,255,255,0.08);padding-top:24px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;}
+.footer-copy{font-family:var(--sans);font-size:12px;color:rgba(245,240,232,0.3);}
+.footer-heart{font-family:var(--serif);font-size:12px;font-style:italic;color:rgba(245,240,232,0.3);}
+@media(max-width:768px){.footer-top{grid-template-columns:1fr 1fr;}footer{padding:40px 20px 24px;}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(28px);}to{opacity:1;transform:translateY(0);}}
+@keyframes fadeIn{from{opacity:0;}to{opacity:1;}}
+@keyframes marquee{from{transform:translateX(0);}to{transform:translateX(-50%);}}
 </style>
 </head>
 <body>
+<div class="cursor" id="cur"></div>
+<div class="cursor-ring" id="curR"></div>
 
-<!-- NAV -->
 <nav>
   <a href="index.html" class="nav-logo">
     <span class="nav-logo-main">SM_art</span>
     <span class="nav-logo-sub">Art by Sophia</span>
   </a>
-  <ul class="nav-links">
-    <li><a href="gallery.html">Gallery</a></li>
-    <li><a href="#">Shop</a></li>
-    <li><a href="#">Sophia's Story</a></li>
-    <li><a href="#">Corporate</a></li>
-    <li><a href="#">Contact</a></li>
-    <li><a href="gallery.html" class="nav-cta">Shop Now</a></li>
-  </ul>
+  <div class="nav-links">
+    <a href="gallery.html">Gallery</a>
+    <a href="#shop">Shop</a>
+    <a href="#sophia">Sophia's Story</a>
+    <a href="#corporate">Corporate</a>
+    <a href="mailto:artbysophiam@gmail.com">Contact</a>
+    <a href="gallery.html" class="nav-cta">Shop Now</a>
+  </div>
 </nav>
 
-<!-- HERO -->
 <section class="hero">
-  <div class="hero-left">
-    <div class="hero-eyebrow">SM_art · Art by Sophia</div>
-    <h1 class="hero-title">
-      Where <em>wild</em><br>things are<br>painted
-    </h1>
-    <p class="hero-subtitle">
-      Original paintings by a young South African artist — bold wildlife, vivid portraits, and botanical watercolour. Every brushstroke hand-painted with joy, intention, and heart.
-    </p>
-    <div class="hero-badges">
-      <span class="badge badge-hot">🏆 Ambassadors Award</span>
-      <span class="badge">4× Diploma</span>
-      <span class="badge">National Eisteddfod</span>
-      <span class="badge">Acrylic · Watercolour · Charcoal</span>
+  <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">South African Young Artist · Est. 2020</div>
+    <h1 class="hero-title">Art born<br>from<br><em>joy.</em></h1>
+    <p class="hero-desc">Sophia is a 12-year-old South African artist whose vibrant work has won the prestigious <strong>Ambassadors Award</strong> at the National Eisteddfod. She started painting at 7.</p>
+    <div class="hero-buttons">
+      <a href="gallery.html" class="btn-white">View Gallery</a>
+      <a href="#sophia" class="btn-outline-white">Sophia's Story</a>
     </div>
-    <div class="hero-ctas">
-      <a href="gallery.html" class="btn-primary">View the Gallery</a>
-      <a href="#about" class="btn-secondary">Sophia's Story</a>
+    <div class="hero-awards">
+      <div class="award-item"><div class="award-icon">🏆</div><div class="award-title">Ambassadors Award</div><div class="award-sub">National Eisteddfod 2024</div></div>
+      <div class="award-item"><div class="award-icon">🎖️</div><div class="award-title">4 Diplomas</div><div class="award-sub">National Eisteddfod</div></div>
+      <div class="award-item"><div class="award-icon">🎨</div><div class="award-title">Age 7</div><div class="award-sub">Started Painting</div></div>
+      <div class="award-item"><div class="award-icon">🖼️</div><div class="award-title">33 Works</div><div class="award-sub">Original Collection</div></div>
     </div>
   </div>
-  <div class="hero-right">
-    <img src="images/Cheetah.jpg.jpg" alt="Cheetah painting by Sophia — SM_art">
-    <div class="hero-right-overlay"></div>
-    <div class="hero-credit">Cheetah · Acrylic on Canvas</div>
+  <div class="hero-logo-mark">
+    <img src="images/SM_art_LOGO.png.png" alt="SM_art logo">
   </div>
 </section>
 
-<!-- MARQUEE -->
-<div class="marquee-strip" aria-hidden="true">
+<div class="marquee-strip">
   <div class="marquee-track">
-    <span class="marquee-item">Original Paintings <span class="marquee-dot"></span></span>
-    <span class="marquee-item">Art Prints <span class="marquee-dot"></span></span>
-    <span class="marquee-item">Wall Calendars <span class="marquee-dot"></span></span>
-    <span class="marquee-item">Desk Calendars <span class="marquee-dot"></span></span>
-    <span class="marquee-item">Corporate Gifts <span class="marquee-dot"></span></span>
-    <span class="marquee-item">Wildlife · Portraits · Botanical <span class="marquee-dot"></span></span>
-    <span class="marquee-item">South African Artist <span class="marquee-dot"></span></span>
-    <span class="marquee-item">Handmade with Heart <span class="marquee-dot"></span></span>
-    <!-- duplicate for seamless loop -->
-    <span class="marquee-item">Original Paintings <span class="marquee-dot"></span></span>
-    <span class="marquee-item">Art Prints <span class="marquee-dot"></span></span>
-    <span class="marquee-item">Wall Calendars <span class="marquee-dot"></span></span>
-    <span class="marquee-item">Desk Calendars <span class="marquee-dot"></span></span>
-    <span class="marquee-item">Corporate Gifts <span class="marquee-dot"></span></span>
-    <span class="marquee-item">Wildlife · Portraits · Botanical <span class="marquee-dot"></span></span>
-    <span class="marquee-item">South African Artist <span class="marquee-dot"></span></span>
-    <span class="marquee-item">Handmade with Heart <span class="marquee-dot"></span></span>
+    <span>ORIGINAL ARTWORKS · ACRYLIC &amp; WATERCOLOUR · CALENDARS · GREETING CARDS · BOOKMARKS · CORPORATE GIFTS · NATIONAL EISTEDDFOD AWARD WINNER · SOUTH AFRICAN ART · </span>
+    <span>ORIGINAL ARTWORKS · ACRYLIC &amp; WATERCOLOUR · CALENDARS · GREETING CARDS · BOOKMARKS · CORPORATE GIFTS · NATIONAL EISTEDDFOD AWARD WINNER · SOUTH AFRICAN ART · </span>
   </div>
 </div>
 
-<!-- STATS -->
-<div class="stats-row">
-  <div class="stat-item">
-    <span class="stat-num">35+</span>
-    <span class="stat-label">Original Works</span>
-  </div>
-  <div class="stat-item">
-    <span class="stat-num">5</span>
-    <span class="stat-label">Years Painting</span>
-  </div>
-  <div class="stat-item">
-    <span class="stat-num">4</span>
-    <span class="stat-label">Diplomas Awarded</span>
-  </div>
-  <div class="stat-item">
-    <span class="stat-num">5+</span>
-    <span class="stat-label">Mediums Mastered</span>
-  </div>
-</div>
-
-<!-- ABOUT -->
-<section class="about" id="about">
-  <div class="about-image">
-    <img src="images/market_stall.jpg.jpg" alt="Sophia painting in her studio — SM_art">
-  </div>
-  <div class="about-text">
-    <div class="section-eyebrow">Sophia's Story</div>
-    <h2 class="section-title">A brush, a blank<br>canvas, and <em>everything</em></h2>
-    <p class="about-body">
-      It started with a peacock. Sophia was seven years old when she painted her first piece — bold, colourful, fearless. Nobody told her how hard painting was supposed to be. She just painted.
-    </p>
-    <p class="about-body">
-      Five years on, she paints wildlife that roars off the canvas, portraits full of personality, and watercolours that glow with quiet joy. She has earned <strong>four diplomas</strong> and the prestigious <strong>Ambassadors Award</strong> at the National Eisteddfod — recognition that her talent is real, and growing.
-    </p>
-    <p class="about-body">
-      SM_art isn't just a name. It's the story of a young artist who paints because she loves it, sells because people love what she creates, and gives a portion of every sale to animal welfare — because the animals she paints deserve that.
-    </p>
-
-    <div class="achievements">
-      <div class="achievement">
-        <div class="achievement-icon">🏆</div>
-        <div>
-          <div class="achievement-title">Ambassadors Award — National Eisteddfod</div>
-          <div class="achievement-desc">The highest honour at South Africa's National Eisteddfod, awarded for exceptional artistic merit.</div>
-        </div>
+<section class="about-section" id="sophia">
+  <div class="about-inner">
+    <div class="about-images">
+      <img src="images/Art_Competition.jpg.jpg" alt="Sophia at National Art Competition" class="about-img-main">
+      <img src="images/market_stall.jpg.jpg" alt="Sophia at market" class="about-img-secondary">
+      <div class="about-img-feature">
+        <img src="images/peacock.jpg.jpg" alt="The Peacock — Sophia's first painting, age 7">
+        <div class="about-img-caption">"The Peacock" — Sophia's very first painting, age 7. The piece that started it all.</div>
       </div>
-      <div class="achievement">
-        <div class="achievement-icon">🎓</div>
-        <div>
-          <div class="achievement-title">4 Diplomas in Visual Art</div>
-          <div class="achievement-desc">Earned across multiple disciplines — acrylic, watercolour, charcoal and mixed media.</div>
-        </div>
+    </div>
+    <div class="about-text">
+      <div class="about-eyebrow">The Artist Behind SM_art</div>
+      <h2 class="about-title">Where talent<br>meets <em>heart.</em></h2>
+      <p class="about-body">Sophia picked up a brush at age 7 and painted a peacock that stopped everyone in the room. Five years later, she's an Ambassadors Award winner at the National Eisteddfod — South Africa's most prestigious arts platform.</p>
+      <p class="about-body">Her work is bold, joyful, and unmistakably hers. Wildlife that feels alive. Portraits full of personality. Botanicals that glow. Every piece is <strong>hand-painted with joy and integrity</strong> — values Sophia lives by.</p>
+      <p class="about-body">A portion of every sale goes to animal welfare. Because the animals she paints deserve that.</p>
+      <div class="about-values">
+        <span class="value-tag">Kindness</span>
+        <span class="value-tag">Integrity</span>
+        <span class="value-tag">Dedication</span>
+        <span class="value-tag">Loyalty</span>
+        <span class="value-tag">Honesty</span>
       </div>
     </div>
   </div>
 </section>
 
-<!-- GALLERY PREVIEW -->
-<section class="gallery-preview">
-  <div class="section-header">
-    <div class="section-header-left">
-      <div class="section-eyebrow">The Collection</div>
-      <h2 class="section-title" style="margin-bottom:0;">Recent Works</h2>
+<section class="gallery-section" id="gallery">
+  <div class="gallery-inner">
+    <div class="section-header">
+      <div>
+        <div class="section-eyebrow">The Collection</div>
+        <h2 class="section-title">Recent <em>works</em></h2>
+      </div>
+      <a href="gallery.html" class="view-all">View Full Gallery</a>
     </div>
-    <a href="gallery.html" class="see-all">View Full Gallery</a>
-  </div>
-
-  <div class="preview-grid">
-    <a href="gallery.html" class="preview-card">
-      <img src="images/Wild_Dogs.jpg.jpg" alt="African Wild Dogs by Sophia">
-      <div class="preview-card-label">
-        <div class="preview-label-title">African Wild Dogs</div>
-        <div class="preview-label-meta">Acrylic on Canvas · Wildlife</div>
-      </div>
-    </a>
-    <a href="gallery.html" class="preview-card">
-      <img src="images/Pink_Giraffe.jpg.jpg" alt="Pink Giraffe by Sophia">
-      <div class="preview-card-label">
-        <div class="preview-label-title">Pink Giraffe</div>
-        <div class="preview-label-meta">Acrylic · Wildlife</div>
-      </div>
-    </a>
-    <a href="gallery.html" class="preview-card">
-      <img src="images/Boss_Lady.jpg.jpg" alt="Boss Lady by Sophia">
-      <div class="preview-card-label">
-        <div class="preview-label-title">Boss Lady</div>
-        <div class="preview-label-meta">Acrylic · Portrait</div>
-      </div>
-    </a>
-    <a href="gallery.html" class="preview-card">
-      <img src="images/octopus.jpg.jpg" alt="Octopus by Sophia">
-      <div class="preview-card-label">
-        <div class="preview-label-title">Octopus</div>
-        <div class="preview-label-meta">Acrylic · Wildlife</div>
-      </div>
-    </a>
-    <a href="gallery.html" class="preview-card">
-      <img src="images/Black_Eyes_Susan.jpg.jpg" alt="Black-Eyed Susan by Sophia">
-      <div class="preview-card-label">
-        <div class="preview-label-title">Black-Eyed Susan</div>
-        <div class="preview-label-meta">Watercolour · Botanical</div>
-      </div>
-    </a>
-  </div>
-</section>
-
-<!-- PRODUCTS -->
-<section class="products">
-  <div class="section-header">
-    <div class="section-header-left">
-      <div class="section-eyebrow">Shop</div>
-      <h2 class="section-title" style="margin-bottom:0;">Art you can live with</h2>
-    </div>
-    <a href="#" class="see-all">View Shop</a>
-  </div>
-
-  <div class="products-grid">
-    <div class="product-card">
-      <div class="product-img">
-        <img src="images/Wild_Dogs.jpg.jpg" alt="Original Painting">
-      </div>
-      <div class="product-info">
-        <div class="product-name">Original Paintings</div>
-        <div class="product-desc">One-of-a-kind acrylic, watercolour and charcoal originals. Each piece is signed and comes with a certificate of authenticity.</div>
-        <div class="product-price">From R800</div>
-        <a href="#" class="product-btn">Enquire</a>
-      </div>
-    </div>
-
-    <div class="product-card">
-      <div class="product-img">
-        <div class="product-img-placeholder">🖼️</div>
-      </div>
-      <div class="product-info">
-        <div class="product-name">Art Prints</div>
-        <div class="product-desc">Museum-quality prints of Sophia's most loved works. Printed on premium fine art paper. Available in A4 and A3.</div>
-        <div class="product-price">From R120</div>
-        <a href="#" class="product-btn">Order Print</a>
-      </div>
-    </div>
-
-    <div class="product-card">
-      <div class="product-img">
-        <div class="product-img-placeholder">📅</div>
-      </div>
-      <div class="product-info">
-        <div class="product-name">Art Calendars</div>
-        <div class="product-desc">A3 Flip Calendars, A5 Desk Calendars, A3 Desk Pads and Weekly Planners — all featuring Sophia's original artwork.</div>
-        <div class="product-price">From R120</div>
-        <a href="#" class="product-btn">Shop Calendars</a>
-      </div>
+    <div class="gallery-grid">
+      <div class="gallery-item"><img src="images/Wild_Dogs.jpg.jpg" alt="African Wild Dogs"><div class="gallery-item-info"><div class="gallery-item-cat">Wildlife</div><div class="gallery-item-title">African Wild Dogs</div></div><div class="gallery-item-enquire">Enquire</div></div>
+      <div class="gallery-item"><img src="images/Pink_Giraffe.jpg.jpg" alt="Pink Giraffe"><div class="gallery-item-info"><div class="gallery-item-cat">Wildlife</div><div class="gallery-item-title">Pink Giraffe</div></div><div class="gallery-item-enquire">Enquire</div></div>
+      <div class="gallery-item"><img src="images/Boss_Lady.jpg.jpg" alt="Boss Lady"><div class="gallery-item-info"><div class="gallery-item-cat">Portrait</div><div class="gallery-item-title">Boss Lady</div></div><div class="gallery-item-enquire">Enquire</div></div>
+      <div class="gallery-item"><img src="images/Cheetah.jpg.jpg" alt="Cheetah"><div class="gallery-item-info"><div class="gallery-item-cat">Wildlife</div><div class="gallery-item-title">Cheetah</div></div><div class="gallery-item-enquire">Enquire</div></div>
+      <div class="gallery-item"><img src="images/Black_Eyes_Susan.jpg.jpg" alt="Black-Eyed Susan"><div class="gallery-item-info"><div class="gallery-item-cat">Botanical</div><div class="gallery-item-title">Black-Eyed Susan</div></div><div class="gallery-item-enquire">Enquire</div></div>
+      <div class="gallery-item"><img src="images/Popcorn_Lady.jpg.jpg" alt="Popcorn Lady"><div class="gallery-item-info"><div class="gallery-item-cat">Portrait</div><div class="gallery-item-title">Popcorn Lady</div></div><div class="gallery-item-enquire">Enquire</div></div>
     </div>
   </div>
 </section>
 
-<!-- CORPORATE BAND -->
-<section class="corporate-band">
-  <div class="corp-text">
-    <div class="section-eyebrow">Corporate</div>
-    <h2 class="section-title">Gifts that<br>tell a <em>story</em></h2>
-    <p class="corp-body">
-      Looking for something different for your clients, team or partners? SM_art's branded calendars and art prints make corporate gifts that people actually keep — and remember who sent them.
-    </p>
-    <div class="corp-features">
-      <div class="corp-feature">Custom branded calendars for your business</div>
-      <div class="corp-feature">Bulk orders with competitive pricing</div>
-      <div class="corp-feature">Unique South African artwork — not another pen set</div>
-      <div class="corp-feature">Supports a young local artist and animal welfare</div>
+<section class="products-section" id="shop">
+  <div class="products-inner">
+    <div class="section-header">
+      <div>
+        <div class="section-eyebrow">Shop</div>
+        <h2 class="section-title">Art you can <em>live with</em></h2>
+      </div>
+      <a href="gallery.html" class="view-all">View All</a>
     </div>
-    <a href="#" class="btn-primary">Request a Quote</a>
-  </div>
-  <div class="corp-image">
-    <img src="images/market_stall.jpg.jpg" alt="SM_art at market — Sophia's artwork on display" onerror="this.style.display='none'">
+    <div class="products-grid">
+      <div class="product-card"><img src="images/Wild_Dogs.jpg.jpg" alt="Original Painting" class="product-card-img"><div class="product-card-body"><div class="product-tag">Original</div><div class="product-name">Original Paintings</div><div class="product-desc">One-of-a-kind originals in acrylic, watercolour and charcoal. Signed and certified.</div><a href="mailto:artbysophiam@gmail.com" class="product-enquire">Enquire →</a></div></div>
+      <div class="product-card"><img src="images/Poppies.jpg.jpg" alt="Art Print" class="product-card-img"><div class="product-card-body"><div class="product-tag">Prints</div><div class="product-name">Art Prints</div><div class="product-desc">Museum-quality prints on premium fine art paper. A4 and A3 available. From R120.</div><a href="mailto:artbysophiam@gmail.com" class="product-enquire">Order →</a></div></div>
+      <div class="product-card"><img src="images/market_stall.jpg.jpg" alt="Calendars" class="product-card-img"><div class="product-card-body"><div class="product-tag">Calendars</div><div class="product-name">Art Calendars</div><div class="product-desc">A3 Flip · A5 Desk · A3 Desk Pad · Weekly Planner. From R120.</div><a href="mailto:artbysophiam@gmail.com" class="product-enquire">Order →</a></div></div>
+      <div class="product-card"><img src="images/Mama_and_Me.jpg.jpg" alt="Corporate Gifts" class="product-card-img"><div class="product-card-body"><div class="product-tag">Corporate</div><div class="product-name">Corporate Gifts</div><div class="product-desc">Branded calendars and prints for clients and teams. Bulk pricing available.</div><a href="mailto:artbysophiam@gmail.com" class="product-enquire">Enquire →</a></div></div>
+    </div>
   </div>
 </section>
 
-<!-- FOOTER -->
+<section class="corporate-section" id="corporate">
+  <div class="corporate-inner">
+    <div>
+      <div class="corporate-eyebrow">Corporate</div>
+      <h2 class="corporate-title">Gifts that<br>tell a story.</h2>
+      <p class="corporate-body">Replace the forgettable with the unforgettable. SM_art's branded calendars and prints make corporate gifts people actually keep — and remember who sent them.</p>
+      <ul class="corporate-features">
+        <li>Custom branded calendars for your business</li>
+        <li>Bulk orders with competitive pricing</li>
+        <li>Unique South African artwork — not another pen set</li>
+        <li>Supports a young local artist and animal welfare</li>
+        <li>Available nationwide</li>
+      </ul>
+      <a href="mailto:artbysophiam@gmail.com" class="btn-pink">Request a Quote</a>
+    </div>
+    <div class="corporate-calendar">
+      <div class="corp-cal-title">Calendar Pricing</div>
+      <div class="corp-cal-item"><span class="corp-cal-name">A3 Flip Calendar</span><span class="corp-cal-price">R150</span></div>
+      <div class="corp-cal-item"><span class="corp-cal-name">A5 Desk Calendar</span><span class="corp-cal-price">R120</span></div>
+      <div class="corp-cal-item"><span class="corp-cal-name">A3 Desk Pad</span><span class="corp-cal-price">R250</span></div>
+      <div class="corp-cal-item"><span class="corp-cal-name">Weekly Planner</span><span class="corp-cal-price">R150</span></div>
+      <div class="corp-cal-item"><span class="corp-cal-name">Large Desk Mat</span><span class="corp-cal-price">R400</span></div>
+    </div>
+  </div>
+</section>
+
 <footer>
-  <div class="footer-top">
-    <div>
-      <span class="footer-brand-name">SM_art</span>
-      <p class="footer-brand-desc">
-        Original artwork by Sophia — a young South African artist painting wildlife, portraits and botanicals with boldness, joy and heart. A portion of every sale supports animal welfare.
-      </p>
-      <div class="footer-social">
-        <a href="#" class="social-link" aria-label="Instagram">ig</a>
-        <a href="#" class="social-link" aria-label="Facebook">fb</a>
-        <a href="#" class="social-link" aria-label="TikTok">tt</a>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <span class="footer-logo">SM_art</span>
+        <p class="footer-tagline">Original artwork by Sophia — a young South African artist. A portion of every sale supports animal welfare.</p>
+        <div class="footer-social">
+          <a href="#" class="social-link" aria-label="Instagram">ig</a>
+          <a href="#" class="social-link" aria-label="Facebook">fb</a>
+          <a href="#" class="social-link" aria-label="TikTok">tt</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title">Gallery</div>
+        <a href="gallery.html">All Works</a>
+        <a href="gallery.html">Wildlife</a>
+        <a href="gallery.html">Portraits</a>
+        <a href="gallery.html">Botanical</a>
+        <a href="gallery.html">Watercolour</a>
+        <a href="gallery.html">Early Works</a>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title">Shop</div>
+        <a href="mailto:artbysophiam@gmail.com">Original Paintings</a>
+        <a href="mailto:artbysophiam@gmail.com">Art Prints</a>
+        <a href="mailto:artbysophiam@gmail.com">Wall Calendars</a>
+        <a href="mailto:artbysophiam@gmail.com">Desk Calendars</a>
+        <a href="mailto:artbysophiam@gmail.com">Weekly Planners</a>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title">SM_art</div>
+        <a href="#sophia">Sophia's Story</a>
+        <a href="#corporate">Corporate</a>
+        <a href="mailto:artbysophiam@gmail.com">Contact</a>
+        <a href="mailto:artbysophiam@gmail.com">Wholesale</a>
       </div>
     </div>
-    <div>
-      <div class="footer-col-title">Gallery</div>
-      <ul class="footer-links">
-        <li><a href="gallery.html">All Works</a></li>
-        <li><a href="gallery.html">Wildlife</a></li>
-        <li><a href="gallery.html">Portraits</a></li>
-        <li><a href="gallery.html">Botanical</a></li>
-        <li><a href="gallery.html">Watercolour</a></li>
-        <li><a href="gallery.html">Early Works</a></li>
-      </ul>
+    <div class="footer-bottom">
+      <div class="footer-copy">© 2026 SM_art · All rights reserved</div>
+      <div class="footer-heart">Handcrafted in South Africa 🇿🇦</div>
     </div>
-    <div>
-      <div class="footer-col-title">Shop</div>
-      <ul class="footer-links">
-        <li><a href="#">Original Paintings</a></li>
-        <li><a href="#">Art Prints</a></li>
-        <li><a href="#">Wall Calendars</a></li>
-        <li><a href="#">Desk Calendars</a></li>
-        <li><a href="#">Weekly Planners</a></li>
-        <li><a href="#">Corporate Orders</a></li>
-      </ul>
-    </div>
-    <div>
-      <div class="footer-col-title">SM_art</div>
-      <ul class="footer-links">
-        <li><a href="#about">Sophia's Story</a></li>
-        <li><a href="#">Contact</a></li>
-        <li><a href="#">Corporate Enquiries</a></li>
-        <li><a href="#">Wholesale</a></li>
-      </ul>
-    </div>
-  </div>
-  <div class="footer-bottom">
-    <div class="footer-copy">© 2026 SM_art · Art by Sophia · All rights reserved</div>
-    <div class="footer-copy">Handcrafted in South Africa 🇿🇦</div>
   </div>
 </footer>
 
+<script>
+const cur=document.getElementById('cur');
+const curR=document.getElementById('curR');
+document.addEventListener('mousemove',e=>{
+  cur.style.left=e.clientX+'px';
+  cur.style.top=e.clientY+'px';
+  setTimeout(()=>{curR.style.left=e.clientX+'px';curR.style.top=e.clientY+'px';},80);
+});
+</script>
 </body>
 </html>
