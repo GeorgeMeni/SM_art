@@ -1,1 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SM_art — Art by Sophia | South African Young Artist</title>
+<meta name="description" content="SM_art is the online home of Sophia, a 12-year-old South African artist. Winner of the Ambassadors Award at the National Eisteddfod. Original artworks, prints, calendars and more.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Sans:wght@300;400;500;600&family=Pacifico&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --cream:#fdf9f4;--cream-mid:#f5ede3;
+  --cobalt:#1a5fb4;--cobalt-light:#3584e4;
+  --gold:#e5a50a;--pink:#f0187a;--pink-light:#ff4099;
+  --ink:#1c1c2e;--ink-mid:#6b6b80;--ink-light:#9999aa;
+  --serif:'Playfair Display',Georgia,serif;
+  --sans:'DM Sans',sans-serif;
+  --script:'Pacifico',cursive;
+  --dark-bg:#0c0c14;--dark-bg2:#13131f;--dark-bg3:#1a1a2e;
+}
+html{scroll-behavior:smooth;}
+body{background:var(--dark-bg);color:#f5f0e8;font-family:var(--sans);overflow-x:hidden;}
+.cursor{position:fixed;width:10px;height:10px;background:var(--pink);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:transform 0.1s;}
+.cursor-ring{position:fixed;width:34px;height:34px;border:1.5px solid var(--cobalt-light);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:all 0.16s ease;}
+@media(max-width:768px){.cursor,.cursor-ring{display:none;}}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:14px 48px;background:rgba(12,12,20,0);transition:all 0.4s ease;}
+nav.scrolled{background:rgba(12,12,20,0.96);backdrop-filter:blur(12px);border-bottom:1px solid rgba(255,255,255,0.06);}
+.nav-logo{text-decoration:none;display:flex;flex-direction:column;line-height:1;}
+.nav-logo-main{font-family:var(--script);font-size:36px;color:white;text-shadow:0 2px 10px rgba(0,0,0,0.4);transition:text-shadow 0.3s;}
+nav.scrolled .nav-logo-main{text-shadow:none;}
+.nav-logo-sub{font-family:var(--sans);font-size:9px;font-weight:500;letter-spacing:0.28em;text-transform:uppercase;color:rgba(255,255,255,0.75);margin-top:4px;}
+.nav-links{display:flex;gap:32px;align-items:center;}
+.nav-links a{font-family:var(--sans);font-size:13px;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;color:rgba(255,255,255,0.85);text-decoration:none;transition:opacity 0.2s;}
+.nav-links a:hover{opacity:1;}
+.nav-cta{background:var(--pink)!important;color:white!important;padding:12px 26px;border-radius:2px;box-shadow:0 4px 20px rgba(240,24,122,0.35);}
+.nav-cta:hover{transform:translateY(-1px);box-shadow:0 6px 24px rgba(240,24,122,0.5)!important;}
+@media(max-width:768px){nav{padding:12px 20px;}.nav-links{gap:16px;}.nav-links a{font-size:11px;}}
+.hero{min-height:100vh;position:relative;overflow:hidden;}
+.hero-bg{position:absolute;inset:0;background-image:url('images/Boss_Lady.jpg');background-size:cover;background-position:center top;animation:float 10s ease-in-out infinite;}
+.hero-overlay{position:absolute;inset:0;background:linear-gradient(to right,rgba(0,0,0,0.72) 0%,rgba(0,0,0,0.3) 60%,transparent 100%);}
+.hero-content{position:relative;z-index:2;padding:0 10vw;height:calc(100vh - 60px);display:flex;flex-direction:column;justify-content:center;}
+.hero-eyebrow{font-family:var(--sans);font-size:11px;letter-spacing:0.22em;text-transform:uppercase;color:var(--gold);margin-bottom:20px;animation:fadeUp 0.8s ease both;}
+.hero-title{font-family:var(--serif);font-size:clamp(52px,7vw,100px);font-weight:900;line-height:0.95;color:white;letter-spacing:-2px;margin-bottom:32px;animation:fadeUp 0.8s 0.2s ease both;}
+.hero-title em{color:var(--gold);font-style:italic;}
+.hero-desc{color:rgba(255,255,255,0.82);font-size:16px;max-width:420px;line-height:1.75;margin-bottom:44px;animation:fadeUp 0.8s 0.4s ease both;}
+.hero-buttons{display:flex;gap:16px;flex-wrap:wrap;animation:fadeUp 0.8s 0.6s ease both;}
+.btn-white{background:white;color:var(--cobalt);padding:16px 32px;font-family:var(--sans);font-weight:500;font-size:13px;letter-spacing:0.08em;text-transform:uppercase;text-decoration:none;border-radius:2px;transition:all 0.2s;}
+.btn-white:hover{background:var(--cream);transform:translateY(-2px);}
+.btn-outline-white{border:1.5px solid rgba(255,255,255,0.5);color:white;padding:16px 32px;font-family:var(--sans);font-weight:500;font-size:13px;letter-spacing:0.08em;text-transform:uppercase;text-decoration:none;border-radius:2px;transition:all 0.2s;}
+.btn-outline-white:hover{background:rgba(255,255,255,0.1);}
+.hero-awards{margin-top:60px;padding-top:32px;border-top:1px solid rgba(255,255,255,0.15);display:flex;gap:32px;flex-wrap:wrap;animation:fadeUp 0.8s 0.8s ease both;}
+.award-icon{font-size:20px;margin-bottom:4px;}
+.award-title{font-family:var(--serif);font-weight:700;font-size:14px;color:white;}
+.award-sub{font-family:var(--sans);font-size:11px;color:rgba(255,255,255,0.55);letter-spacing:0.05em;}
+.hero-logo-mark{position:absolute;bottom:72px;right:32px;z-index:3;animation:fadeUp 1s 0.9s ease both;transform:rotate(-4deg);}
+.hero-logo-mark img{height:96px;width:auto;filter:drop-shadow(0 4px 16px rgba(0,0,0,0.4));}
+.marquee-strip{background:var(--pink);overflow:hidden;padding:14px 0;border-top:1px solid rgba(255,255,255,0.2);}
+.marquee-track{display:flex;animation:marquee 28s linear infinite;white-space:nowrap;}
+.marquee-track span{font-family:var(--sans);font-size:11px;letter-spacing:0.18em;color:rgba(255,255,255,0.9);padding:0 8px;}
+.about-section{padding:100px 48px;background:var(--dark-bg2);}
+.about-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;}
+.about-images{position:relative;height:560px;}
+.about-img-main{position:absolute;top:0;left:0;width:52%;height:48%;object-fit:cover;object-position:top;border-radius:3px;box-shadow:0 20px 60px rgba(0,0,0,0.4);}
+.about-img-secondary{position:absolute;top:0;right:0;width:45%;height:48%;object-fit:cover;object-position:top;border-radius:3px;box-shadow:0 20px 60px rgba(0,0,0,0.4);}
+.about-img-feature{position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:75%;height:50%;border-radius:3px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,0.5);}
+.about-img-feature img{width:100%;height:100%;object-fit:cover;object-position:top;}
+.about-img-caption{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(transparent,rgba(0,0,0,0.75));padding:24px 16px 12px;font-family:var(--serif);font-size:13px;font-style:italic;color:rgba(255,255,255,0.9);line-height:1.4;}
+.about-eyebrow{font-family:var(--sans);font-size:11px;letter-spacing:0.22em;text-transform:uppercase;color:var(--gold);margin-bottom:20px;}
+.about-title{font-family:var(--serif);font-size:clamp(36px,3.5vw,54px);font-weight:900;color:white;letter-spacing:-1px;line-height:1.1;margin-bottom:32px;}
+.about-title em{color:var(--pink);font-style:italic;}
+.about-body{font-family:var(--sans);font-size:16px;line-height:1.8;color:rgba(245,240,232,0.7);margin-bottom:20px;}
+.about-badges{display:flex;gap:12px;flex-wrap:wrap;margin-top:36px;}
+.badge{padding:8px 18px;border-radius:2px;font-family:var(--sans);font-size:11px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;}
+.badge-gold{background:rgba(232,200,64,0.15);color:var(--gold);border:1px solid rgba(232,200,64,0.3);}
+.badge-pink{background:rgba(240,24,122,0.15);color:var(--pink);border:1px solid rgba(240,24,122,0.3);}
+.badge-blue{background:rgba(26,143,227,0.15);color:#3aa0e6;border:1px solid rgba(26,143,227,0.3);}
+@media(max-width:900px){.about-inner{grid-template-columns:1fr;}.about-images{height:300px;}}
+.gallery-section{padding:100px 48px;background:var(--dark-bg);}
+.gallery-inner{max-width:1200px;margin:0 auto;}
+.section-header{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:56px;}
+.section-eyebrow{font-family:var(--sans);font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-bottom:12px;}
+.section-title{font-family:var(--serif);font-size:clamp(36px,4vw,58px);font-weight:900;color:white;letter-spacing:-1px;line-height:1.1;}
+.section-link{font-family:var(--sans);font-size:12px;letter-spacing:0.1em;text-transform:uppercase;color:var(--cobalt-light);text-decoration:none;border-bottom:1px solid var(--cobalt-light);padding-bottom:2px;white-space:nowrap;}
+.gallery-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;}
+.gallery-item{position:relative;overflow:hidden;cursor:pointer;border-radius:3px;}
+.gallery-item:nth-child(1){grid-column:1/3;height:340px;}
+.gallery-item:nth-child(2){grid-column:3/4;height:340px;}
+.gallery-item:nth-child(3){grid-column:1/2;height:300px;}
+.gallery-item:nth-child(4){grid-column:2/4;height:300px;}
+.gallery-item:nth-child(5){grid-column:1/2;height:280px;}
+.gallery-item:nth-child(6){grid-column:2/4;height:280px;}
+.gallery-item img{width:100%;height:100%;object-fit:cover;transition:transform 0.6s ease;}
+.gallery-item:hover img{transform:scale(1.06);}
+.gallery-item-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,0.65) 0%,transparent 50%);opacity:0;transition:opacity 0.3s ease;}
+.gallery-item:hover .gallery-item-overlay{opacity:1;}
+.gallery-item-info{position:absolute;bottom:0;left:0;right:0;padding:20px;transform:translateY(12px);opacity:0;transition:all 0.3s ease;}
+.gallery-item:hover .gallery-item-info{transform:translateY(0);opacity:1;}
+.gallery-item-cat{font-family:var(--sans);font-size:10px;letter-spacing:0.15em;text-transform:uppercase;color:var(--gold);margin-bottom:4px;}
+.gallery-item-title{font-family:var(--serif);font-size:18px;font-weight:700;color:white;}
+.gallery-item-enquire{position:absolute;top:16px;right:16px;background:white;color:var(--pink);padding:6px 14px;font-family:var(--sans);font-size:10px;letter-spacing:0.1em;text-transform:uppercase;font-weight:500;border-radius:2px;opacity:0;transition:opacity 0.3s ease;}
+.gallery-item:hover .gallery-item-enquire{opacity:1;}
+@media(max-width:768px){.gallery-grid{grid-template-columns:1fr 1fr;}.gallery-item:nth-child(1),.gallery-item:nth-child(2),.gallery-item:nth-child(3),.gallery-item:nth-child(4),.gallery-item:nth-child(5),.gallery-item:nth-child(6){grid-column:auto;height:200px;}}
+.products-section{padding:100px 48px;background:var(--dark-bg2);}
+.products-inner{max-width:1200px;margin:0 auto;}
+.products-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;}
+.product-card{border-radius:3px;overflow:hidden;background:var(--dark-bg3);transition:transform 0.3s,box-shadow 0.3s;}
+.product-card:hover{transform:translateY(-6px);box-shadow:0 20px 60px rgba(0,0,0,0.4);}
+.product-card-img{width:100%;height:220px;object-fit:cover;display:block;}
+.product-card-body{padding:20px;}
+.product-tag{font-family:var(--sans);font-size:9px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--pink);margin-bottom:8px;}
+.product-name{font-family:var(--serif);font-size:18px;font-weight:700;color:white;margin-bottom:8px;}
+.product-desc{font-family:var(--sans);font-size:13px;color:rgba(245,240,232,0.55);line-height:1.6;margin-bottom:16px;}
+.product-enquire{display:inline-block;font-family:var(--sans);font-size:11px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--cobalt-light);text-decoration:none;border-bottom:1px solid var(--cobalt-light);padding-bottom:2px;}
+@media(max-width:900px){.products-grid{grid-template-columns:1fr 1fr;}}
+@media(max-width:480px){.products-grid{grid-template-columns:1fr;}}
+.corporate-section{padding:80px 48px;background:var(--dark-bg3);border-top:1px solid rgba(255,255,255,0.06);border-bottom:1px solid rgba(255,255,255,0.06);}
+.corporate-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;}
+.corporate-eyebrow{font-family:var(--sans);font-size:11px;letter-spacing:0.22em;text-transform:uppercase;color:var(--gold);margin-bottom:16px;}
+.corporate-title{font-family:var(--serif);font-size:clamp(28px,3vw,44px);font-weight:900;color:white;letter-spacing:-1px;line-height:1.1;margin-bottom:20px;}
+.corporate-body{font-family:var(--sans);font-size:15px;line-height:1.75;color:rgba(245,240,232,0.65);margin-bottom:32px;}
+.corporate-features{list-style:none;margin-bottom:36px;}
+.corporate-features li{font-family:var(--sans);font-size:14px;color:rgba(245,240,232,0.7);padding:8px 0;border-bottom:1px solid rgba(255,255,255,0.06);display:flex;align-items:center;gap:12px;}
+.corporate-features li::before{content:'✓';color:var(--gold);font-weight:700;flex-shrink:0;}
+.btn-pink{display:inline-block;background:var(--pink);color:white;padding:16px 32px;font-family:var(--sans);font-weight:600;font-size:12px;letter-spacing:0.12em;text-transform:uppercase;text-decoration:none;border-radius:2px;transition:all 0.2s;}
+.btn-pink:hover{background:var(--pink-light);transform:translateY(-2px);box-shadow:0 8px 24px rgba(240,24,122,0.4);}
+.corporate-calendar{background:var(--dark-bg2);border-radius:4px;padding:32px;border:1px solid rgba(255,255,255,0.08);}
+.corp-cal-title{font-family:var(--serif);font-size:22px;font-weight:700;color:white;margin-bottom:24px;}
+.corp-cal-item{display:flex;justify-content:space-between;align-items:center;padding:14px 0;border-bottom:1px solid rgba(255,255,255,0.06);}
+.corp-cal-item:last-child{border-bottom:none;}
+.corp-cal-name{font-family:var(--sans);font-size:14px;color:rgba(245,240,232,0.8);}
+.corp-cal-price{font-family:var(--serif);font-size:18px;font-weight:700;color:var(--gold);}
+@media(max-width:900px){.corporate-inner{grid-template-columns:1fr;}}
+footer{background:oklch(7% 0.02 260);padding:60px 48px 32px;}
+.footer-inner{max-width:1200px;margin:0 auto;}
+.footer-top{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px;margin-bottom:48px;}
+.footer-logo{font-family:var(--script);font-size:36px;color:white;margin-bottom:8px;}
+.footer-tagline{font-family:var(--sans);font-size:13px;color:rgba(245,240,232,0.5);line-height:1.6;max-width:260px;margin-bottom:24px;}
+.footer-social{display:flex;gap:12px;}
+.social-link{width:36px;height:36px;border:1px solid rgba(255,255,255,0.15);border-radius:2px;display:flex;align-items:center;justify-content:center;text-decoration:none;color:rgba(245,240,232,0.5);font-size:14px;transition:all 0.2s;}
+.social-link:hover{border-color:var(--pink);color:var(--pink);}
+.footer-col-title{font-family:var(--sans);font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:var(--gold);margin-bottom:16px;}
+.footer-col a{display:block;font-family:var(--sans);font-size:13px;color:rgba(245,240,232,0.45);text-decoration:none;margin-bottom:10px;transition:color 0.2s;}
+.footer-col a:hover{color:white;}
+.footer-bottom{border-top:1px solid rgba(255,255,255,0.08);padding-top:24px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;}
+.footer-copy{font-family:var(--sans);font-size:12px;color:rgba(245,240,232,0.3);}
+.footer-heart{font-family:var(--serif);font-size:12px;font-style:italic;color:rgba(245,240,232,0.3);}
+@media(max-width:768px){.footer-top{grid-template-columns:1fr 1fr;}footer{padding:40px 20px 24px;}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(28px);}to{opacity:1;transform:translateY(0);}}
+@keyframes fadeIn{from{opacity:0;}to{opacity:1;}}
+@keyframes marquee{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+@keyframes float{0%,100%{transform:translateY(0) scale(1.02)}50%{transform:translateY(-12px) scale(1.04)}}
+</style>
+</head>
+<body>
+<div class="cursor" id="cur"></div>
+<div class="cursor-ring" id="curR"></div>
+<nav id="main-nav">
+  <a href="index.html" class="nav-logo">
+    <span class="nav-logo-main">SM_art</span>
+    <span class="nav-logo-sub">Art by Sophia</span>
+  </a>
+  <div class="nav-links">
+    <a href="gallery.html">Gallery</a>
+    <a href="#shop">Shop</a>
+    <a href="#sophia">Sophia's Story</a>
+    <a href="#corporate">Corporate</a>
+    <a href="mailto:artbysophiam@gmail.com">Contact</a>
+    <a href="#shop" class="nav-cta">Shop Now</a>
+  </div>
+</nav>
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">South African Young Artist · Est. 2020</div>
+    <h1 class="hero-title">Art born<br>from<br><em>pure joy.</em></h1>
+    <p class="hero-desc">Sophia is a 12-year-old South African artist whose vibrant, whimsical work has won the prestigious <strong>Ambassadors Award</strong> at the National Eisteddfod. She started painting at 7. The world noticed at 11.</p>
+    <div class="hero-buttons">
+      <a href="gallery.html" class="btn-white">View Gallery</a>
+      <a href="#sophia" class="btn-outline-white">Sophia's Story</a>
+    </div>
+    <div class="hero-awards">
+      <div class="award-item"><div class="award-icon">🏆</div><div class="award-title">Ambassadors Award</div><div class="award-sub">National Eisteddfod 2024</div></div>
+      <div class="award-item"><div class="award-icon">🎖️</div><div class="award-title">4 Diplomas</div><div class="award-sub">National Eisteddfod</div></div>
+      <div class="award-item"><div class="award-icon">🎨</div><div class="award-title">Age 7</div><div class="award-sub">Started Painting</div></div>
+      <div class="award-item"><div class="award-icon">📅</div><div class="award-title">Age 11</div><div class="award-sub">First Collection</div></div>
+    </div>
+  </div>
+  <div class="hero-logo-mark"><img src="images/SM_art_LOGO.png" alt="SM_art logo"></div>
+</section>
+<div class="marquee-strip">
+  <div class="marquee-track">
+    <span>ORIGINAL ARTWORKS · ACRYLIC &amp; WATERCOLOUR · CALENDARS · GREETING CARDS · BOOKMARKS · CORPORATE GIFTS · NATIONAL EISTEDDFOD AWARD WINNER · SOUTH AFRICAN ART · </span>
+    <span>ORIGINAL ARTWORKS · ACRYLIC &amp; WATERCOLOUR · CALENDARS · GREETING CARDS · BOOKMARKS · CORPORATE GIFTS · NATIONAL EISTEDDFOD AWARD WINNER · SOUTH AFRICAN ART · </span>
+  </div>
+</div>
+<section class="about-section" id="sophia">
+  <div class="about-inner">
+    <div class="about-images">
+      <img src="images/Art_Competition.jpg" alt="Sophia at National Art Competition" class="about-img-main">
+      <img src="images/market_stall.jpg" alt="Sophia at market" class="about-img-secondary">
+      <div class="about-img-feature">
+        <img src="images/peacock.jpg" alt="Sophia with her first ever painting">
+        <div class="about-img-caption">"The Peacock" — Sophia's very first painting, age 7. The piece that started it all.</div>
+      </div>
+    </div>
+    <div class="about-text">
+      <div class="about-eyebrow">The Artist Behind SM_art</div>
+      <h2 class="about-title">Where talent<br>meets <em>heart.</em></h2>
+      <p class="about-body">Sophia picked up a brush at age 7 and painted a peacock that stopped everyone in the room. Five years later, she's an Ambassadors Award winner at the National Eisteddfod of South Africa — the country's most prestigious arts platform.</p>
+      <p class="about-body">Her work is bold, joyful, and unmistakably hers. From expressive wildlife acrylics to delicate watercolours, every piece carries the same energy: a young artist who paints because she can't imagine not painting.</p>
+      <p class="about-body">What drives her isn't acclaim — it's kindness, integrity, and a deep love for colour. SM_art is Sophia's world, shared with anyone who needs a little more joy on their walls.</p>
+      <div class="about-badges">
+        <span class="badge badge-gold">🏆 Ambassadors Award</span>
+        <span class="badge badge-pink">🎨 4 Diplomas</span>
+        <span class="badge badge-blue">🇿🇦 South African Art</span>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="gallery-section" id="gallery">
+  <div class="gallery-inner">
+    <div class="section-header">
+      <div><div class="section-eyebrow">Selected Works</div><h2 class="section-title">The Gallery</h2></div>
+      <a href="gallery.html" class="section-link">View All Works →</a>
+    </div>
+    <div class="gallery-grid">
+      <div class="gallery-item"><img src="images/Bluebird_Lady.jpg" alt="Bluebird Lady"><div class="gallery-item-overlay"></div><div class="gallery-item-info"><div class="gallery-item-cat">Portrait</div><div class="gallery-item-title">Bluebird Lady</div></div><div class="gallery-item-enquire">Enquire</div></div>
+      <div class="gallery-item"><img src="images/Cheetah.jpg" alt="Cheetah"><div class="gallery-item-overlay"></div><div class="gallery-item-info"><div class="gallery-item-cat">Wildlife</div><div class="gallery-item-title">Cheetah</div></div><div class="gallery-item-enquire">Enquire</div></div>
+      <div class="gallery-item"><img src="images/zebra.jpg" alt="Zebra"><div class="gallery-item-overlay"></div><div class="gallery-item-info"><div class="gallery-item-cat">Wildlife</div><div class="gallery-item-title">Zebra</div></div><div class="gallery-item-enquire">Enquire</div></div>
+      <div class="gallery-item"><img src="images/Boss_Lady.jpg" alt="Boss Lady"><div class="gallery-item-overlay"></div><div class="gallery-item-info"><div class="gallery-item-cat">Portrait</div><div class="gallery-item-title">Boss Lady</div></div><div class="gallery-item-enquire">Enquire</div></div>
+      <div class="gallery-item"><img src="images/Pink_Giraffe.jpg" alt="Pink Giraffe"><div class="gallery-item-overlay"></div><div class="gallery-item-info"><div class="gallery-item-cat">Wildlife</div><div class="gallery-item-title">Pink Giraffe</div></div><div class="gallery-item-enquire">Enquire</div></div>
+      <div class="gallery-item"><img src="images/Popcorn_Lady.jpg" alt="Popcorn Lady"><div class="gallery-item-overlay"></div><div class="gallery-item-info"><div class="gallery-item-cat">Portrait</div><div class="gallery-item-title">Popcorn Lady</div></div><div class="gallery-item-enquire">Enquire</div></div>
+    </div>
+  </div>
+</section>
+<section class="products-section" id="shop">
+  <div class="products-inner">
+    <div class="section-header">
+      <div><div class="section-eyebrow">SM_art Products</div><h2 class="section-title">Take a piece home.</h2></div>
+      <a href="mailto:artbysophiam@gmail.com" class="section-link">Enquire →</a>
+    </div>
+    <div class="products-grid">
+      <div class="product-card"><img src="images/market_stall.jpg" alt="Wall Calendars" class="product-card-img"><div class="product-card-body"><div class="product-tag">Corporate favourite</div><div class="product-name">Wall Calendars</div><div class="product-desc">Annual A3 calendars — the perfect corporate Christmas gift.</div><a href="mailto:artbysophiam@gmail.com" class="product-enquire">Enquire →</a></div></div>
+      <div class="product-card"><img src="images/market2.jpg" alt="Greeting Cards" class="product-card-img"><div class="product-card-body"><div class="product-tag">From R25</div><div class="product-name">Greeting Cards</div><div class="product-desc">Every occasion, painted with joy.</div><a href="mailto:artbysophiam@gmail.com" class="product-enquire">Enquire →</a></div></div>
+      <div class="product-card"><img src="images/In_Bloom_Series.jpg" alt="Bookmarks and Magnets" class="product-card-img"><div class="product-card-body"><div class="product-tag">Stocking fillers</div><div class="product-name">Bookmarks &amp; Magnets</div><div class="product-desc">Pocket-sized pieces of original art.</div><a href="mailto:artbysophiam@gmail.com" class="product-enquire">Enquire →</a></div></div>
+      <div class="product-card"><img src="images/easter_bunny_flowers.jpg" alt="Placemats" class="product-card-img"><div class="product-card-body"><div class="product-tag">Limited edition</div><div class="product-name">Placemats</div><div class="product-desc">Seasonal sets — Christmas &amp; Easter.</div><a href="mailto:artbysophiam@gmail.com" class="product-enquire">Enquire →</a></div></div>
+    </div>
+  </div>
+</section>
+<section class="corporate-section" id="corporate">
+  <div class="corporate-inner">
+    <div>
+      <div class="corporate-eyebrow">Corporate Gifting</div>
+      <h2 class="corporate-title">Gifts that get remembered.</h2>
+      <p class="corporate-body">Give your clients something that stands out. SM_art produces bespoke calendars, card sets, and framed prints for corporate gifting — each one carrying the story of a remarkable young South African artist.</p>
+      <ul class="corporate-features">
+        <li>Custom branded calendars from 50 units</li>
+        <li>Greeting card sets for any occasion</li>
+        <li>Framed original prints available</li>
+        <li>Bulk pricing and delivery across South Africa</li>
+        <li>Christmas, Easter, and year-round collections</li>
+      </ul>
+      <a href="mailto:artbysophiam@gmail.com" class="btn-pink">Request a Corporate Quote</a>
+    </div>
+    <div class="corporate-calendar">
+      <div class="corp-cal-title">2026 Price Guide</div>
+      <div class="corp-cal-item"><span class="corp-cal-name">A3 Flip Wire Calendar</span><span class="corp-cal-price">R150</span></div>
+      <div class="corp-cal-item"><span class="corp-cal-name">A5 Desk Calendar</span><span class="corp-cal-price">R120</span></div>
+      <div class="corp-cal-item"><span class="corp-cal-name">A3 Desk Pad</span><span class="corp-cal-price">R250</span></div>
+      <div class="corp-cal-item"><span class="corp-cal-name">Weekly Planner</span><span class="corp-cal-price">R150</span></div>
+      <div class="corp-cal-item"><span class="corp-cal-name">Large Desk Mat</span><span class="corp-cal-price">R400</span></div>
+    </div>
+  </div>
+</section>
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div>
+        <div class="footer-logo">SM_art</div>
+        <p class="footer-tagline">Original artworks and art products by Sophia, age 12 — South Africa's most joyful young artist.</p>
+        <div class="footer-social">
+          <a href="#" class="social-link" aria-label="Facebook">f</a>
+          <a href="#" class="social-link" aria-label="Instagram">in</a>
+          <a href="#" class="social-link" aria-label="TikTok">tk</a>
+          <a href="#" class="social-link" aria-label="Pinterest">p</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title">Navigate</div>
+        <a href="gallery.html">Gallery</a>
+        <a href="#shop">Shop</a>
+        <a href="#sophia">Sophia's Story</a>
+        <a href="mailto:artbysophiam@gmail.com">Contact</a>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title">Products</div>
+        <a href="#shop">Wall Calendars</a>
+        <a href="#shop">Greeting Cards</a>
+        <a href="#shop">Bookmarks</a>
+        <a href="#shop">Placemats</a>
+        <a href="#shop">Originals</a>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title">Info</div>
+        <a href="#corporate">Corporate Gifting</a>
+        <a href="mailto:artbysophiam@gmail.com">Wholesale</a>
+        <a href="mailto:artbysophiam@gmail.com">FAQs</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-copy">© 2026 SM_art by Sophia. All rights reserved.</span>
+      <span class="footer-heart">Made with paint, passion &amp; a whole lot of joy.</span>
+    </div>
+  </div>
+</footer>
+<script>
+const nav=document.getElementById('main-nav');
+window.addEventListener('scroll',()=>{nav.classList.toggle('scrolled',window.scrollY>40);});
+const cur=document.getElementById('cur'),curR=document.getElementById('curR');
+document.addEventListener('mousemove',e=>{cur.style.left=e.clientX+'px';cur.style.top=e.clientY+'px';curR.style.left=e.clientX+'px';curR.style.top=e.clientY+'px';});
+document.querySelectorAll('a,button,.gallery-item').forEach(el=>{
+  el.addEventListener('mouseenter',()=>{cur.style.transform='translate(-50%,-50%) scale(2)';curR.style.transform='translate(-50%,-50%) scale(1.5)';});
+  el.addEventListener('mouseleave',()=>{cur.style.transform='translate(-50%,-50%) scale(1)';curR.style.transform='translate(-50%,-50%) scale(1)';});
+});
+</script>
+</body>
+</html>
 
